@@ -134,6 +134,35 @@ class SqliteRouteRepository implements RouteRepository {
     return rows.map(_scheduleFromRow).toList();
   }
 
+  Future<void> upsertRoute(BusRoute route) async {
+    await _database.transaction((txn) async {
+      await txn.insert(
+        'bus_routes',
+        _routeToRow(route),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+
+      for (final stop in route.stops) {
+        await txn.insert(
+          'bus_stops',
+          _stopToRow(stop),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+      }
+
+      await txn.delete(
+        'schedules',
+        where: 'route_id = ?',
+        whereArgs: [route.id],
+      );
+      for (final schedule in route.schedule) {
+        await txn.insert('schedules', _scheduleToRow(schedule));
+      }
+    });
+  }
+
+  Future<void> close() => _database.close();
+
   Future<BusRoute> _routeFromRow(Map<String, Object?> row) async {
     final id = row['id']! as String;
     return BusRoute(
@@ -212,6 +241,58 @@ class SqliteRouteRepository implements RouteRepository {
       firstBus: row['first_bus']! as String,
       lastBus: row['last_bus']! as String,
     );
+  }
+
+  Map<String, Object?> _routeToRow(BusRoute route) {
+    return {
+      'id': route.id,
+      'route_number': route.routeNumber,
+      'name': route.name,
+      'name_en': route.nameEn,
+      'name_mm': route.nameMm,
+      'start_stop': route.startStop,
+      'start_stop_en': route.startStopEn,
+      'start_stop_mm': route.startStopMm,
+      'end_stop': route.endStop,
+      'end_stop_en': route.endStopEn,
+      'end_stop_mm': route.endStopMm,
+      'fare_price': route.farePrice,
+      'is_air_con': route.isAirCon ? 1 : 0,
+      'color': route.color,
+      'route_path': jsonEncode(
+        route.routePath.map((point) => point.toJson()).toList(),
+      ),
+      'source': route.source,
+      'source_url': route.sourceUrl,
+      'last_updated': route.lastUpdated,
+      'confidence': route.confidence,
+    };
+  }
+
+  Map<String, Object?> _stopToRow(BusStop stop) {
+    return {
+      'id': stop.id,
+      'name': stop.name,
+      'name_en': stop.nameEn,
+      'name_mm': stop.nameMm,
+      'latitude': stop.latitude,
+      'longitude': stop.longitude,
+      'routes': jsonEncode(stop.routes),
+      'landmark': stop.landmark,
+      'landmark_en': stop.landmarkEn,
+      'landmark_mm': stop.landmarkMm,
+    };
+  }
+
+  Map<String, Object?> _scheduleToRow(Schedule schedule) {
+    return {
+      'route_id': schedule.routeId,
+      'direction': schedule.direction.name,
+      'departure_times': jsonEncode(schedule.departureTimes),
+      'operating_days': jsonEncode(schedule.operatingDays),
+      'first_bus': schedule.firstBus,
+      'last_bus': schedule.lastBus,
+    };
   }
 }
 

@@ -36,6 +36,10 @@ class LocalDatabase {
   }
 
   Future<void> _onCreate(Database db, int version) async {
+    await createSchema(db);
+  }
+
+  static Future<void> createSchema(Database db) async {
     await db.execute('''
       CREATE TABLE bus_routes (
         id TEXT PRIMARY KEY,

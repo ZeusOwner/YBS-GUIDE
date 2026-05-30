@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
 
 import '../../../core/constants/app_constants.dart';
+import '../../../core/constants/route_names.dart';
 import '../../../data/models/bus_route.dart';
 import '../../../data/models/bus_stop.dart';
 import '../../viewmodels/map_view_model.dart';
@@ -149,9 +151,26 @@ class _MapScreenState extends State<MapScreen> {
           point: LatLng(stop.latitude, stop.longitude),
           width: 44,
           height: 44,
-          child: const _BusStopMarker(),
+          child: GestureDetector(
+            onTap: () => _onMarkerTap(context, stop),
+            child: _BusStopMarker(stop: stop),
+          ),
         ),
     ];
+  }
+
+  void _onMarkerTap(BuildContext context, BusStop stop) {
+    final routes = context.read<MapViewModel>().getRoutesForStop(stop.id);
+    showModalBottomSheet<void>(
+      context: context,
+      isDismissible: true,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (sheetContext) {
+        return _StopRoutesSheet(stop: stop, routes: routes);
+      },
+    );
   }
 
   Future<void> _centerOnUser(BuildContext context) async {
@@ -439,13 +458,138 @@ class _NearbyStopsSheet extends StatelessWidget {
   }
 }
 
-class _BusStopMarker extends StatelessWidget {
-  const _BusStopMarker();
+class _StopRoutesSheet extends StatelessWidget {
+  const _StopRoutesSheet({required this.stop, required this.routes});
+
+  final BusStop stop;
+  final List<BusRoute> routes;
 
   @override
   Widget build(BuildContext context) {
-    return const Icon(Icons.location_pin, color: AppColors.error, size: 38);
+    final landmark = stop.landmark.trim();
+
+    return SizedBox(
+      height: 220,
+      child: Padding(
+        padding: const EdgeInsets.all(AppSpacing.md),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Theme.of(context).dividerColor,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+            const SizedBox(height: AppSpacing.md),
+            Text(
+              '${stop.nameEn} / ${stop.nameMm}',
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+            ),
+            if (landmark.isNotEmpty) ...[
+              const SizedBox(height: AppSpacing.xs),
+              Text(
+                landmark,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: Theme.of(
+                  context,
+                ).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+              ),
+            ],
+            const SizedBox(height: AppSpacing.md),
+            if (routes.isEmpty)
+              const Text('No route info available')
+            else
+              Expanded(
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      for (final route in routes)
+                        Padding(
+                          padding: const EdgeInsets.only(right: AppSpacing.sm),
+                          child: _RouteActionChip(route: route),
+                        ),
+                    ],
+                  ),
+                ),
+              ),
+          ],
+        ),
+      ),
+    );
   }
+}
+
+class _RouteActionChip extends StatelessWidget {
+  const _RouteActionChip({required this.route});
+
+  final BusRoute route;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+          decoration: BoxDecoration(
+            color: _parseRouteColor(route.color),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Text(
+            route.routeNumber,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.w800,
+            ),
+          ),
+        ),
+        const SizedBox(height: AppSpacing.xs),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+            context.push('${RouteNames.routeDetail}/${route.id}');
+          },
+          child: const Text('View route'),
+        ),
+      ],
+    );
+  }
+}
+
+class _BusStopMarker extends StatelessWidget {
+  const _BusStopMarker({required this.stop});
+
+  final BusStop stop;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: stop.name,
+      child: const Icon(Icons.location_pin, color: AppColors.error, size: 38),
+    );
+  }
+}
+
+Color _parseRouteColor(String hex) {
+  final normalized = hex.replaceFirst('#', '');
+  final value = int.tryParse(
+    normalized.length == 6 ? 'FF$normalized' : normalized,
+    radix: 16,
+  );
+  return Color(value ?? AppColors.primary.toARGB32());
 }
 
 class _ClusterMarker extends StatelessWidget {

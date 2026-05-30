@@ -1,13 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ybs_guide/data/datasources/local_ybs_datasource.dart';
 import 'package:ybs_guide/data/repositories/ybs_repository.dart';
 import 'package:ybs_guide/main.dart';
+
+import '../helpers/test_database_helper.dart';
 
 void main() {
   testWidgets('Home screen renders correctly', (tester) async {
     SharedPreferences.setMockInitialValues({});
-    final repository = YbsRepository(LocalYbsDatasource());
+    final sqliteRepository = await TestDatabaseHelper.createSeededRepository();
+    final repository = YbsRepository(sqliteRepository);
 
     await tester.pumpWidget(createYbsGuideApp(repository));
     await tester.pump(const Duration(seconds: 2));

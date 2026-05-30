@@ -81,6 +81,12 @@ class MapViewModel extends ChangeNotifier {
     return [...routeMatches, ...stopMatches].take(8).toList();
   }
 
+  List<BusRoute> getRoutesForStop(String stopId) {
+    return routes
+        .where((route) => route.stops.any((stop) => stop.id == stopId))
+        .toList();
+  }
+
   Future<void> loadMapData() async {
     isLoading = true;
     notifyListeners();
