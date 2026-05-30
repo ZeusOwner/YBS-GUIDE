@@ -10,7 +10,10 @@ import '../../viewmodels/search_view_model.dart';
 import '../../widgets/loading_widget.dart';
 
 class SearchScreen extends StatefulWidget {
-  const SearchScreen({super.key});
+  const SearchScreen({super.key, this.title, this.onRouteSelected});
+
+  final String? title;
+  final Future<void> Function(BusRoute route)? onRouteSelected;
 
   @override
   State<SearchScreen> createState() => _SearchScreenState();
@@ -39,7 +42,7 @@ class _SearchScreenState extends State<SearchScreen> {
     final viewModel = context.watch<SearchViewModel>();
 
     return Scaffold(
-      appBar: AppBar(title: Text(l10n.search)),
+      appBar: AppBar(title: Text(widget.title ?? l10n.search)),
       body: Column(
         children: [
           Padding(
@@ -71,7 +74,12 @@ class _SearchScreenState extends State<SearchScreen> {
               ],
             ),
           ),
-          Expanded(child: _SearchBody(viewModel: viewModel)),
+          Expanded(
+            child: _SearchBody(
+              viewModel: viewModel,
+              onRouteSelected: widget.onRouteSelected,
+            ),
+          ),
         ],
       ),
     );
@@ -79,9 +87,10 @@ class _SearchScreenState extends State<SearchScreen> {
 }
 
 class _SearchBody extends StatelessWidget {
-  const _SearchBody({required this.viewModel});
+  const _SearchBody({required this.viewModel, required this.onRouteSelected});
 
   final SearchViewModel viewModel;
+  final Future<void> Function(BusRoute route)? onRouteSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -111,7 +120,16 @@ class _SearchBody extends StatelessWidget {
         final route = viewModel.filteredRoutes[index];
         return _SearchResultCard(
           route: route,
-          onTap: () => context.push('${RouteNames.routeDetail}/${route.id}'),
+          onTap: () async {
+            if (onRouteSelected != null) {
+              await onRouteSelected!(route);
+              return;
+            }
+            if (!context.mounted) {
+              return;
+            }
+            context.push('${RouteNames.routeDetail}/${route.id}');
+          },
         );
       },
     );

@@ -5,9 +5,12 @@ class BusRoute {
   const BusRoute({
     required this.id,
     required this.routeNumber,
-    required this.name,
-    required this.startStop,
-    required this.endStop,
+    required this.nameEn,
+    required this.nameMm,
+    required this.startStopEn,
+    required this.startStopMm,
+    required this.endStopEn,
+    required this.endStopMm,
     required this.stops,
     required this.schedule,
     required this.farePrice,
@@ -23,9 +26,12 @@ class BusRoute {
 
   final String id;
   final String routeNumber;
-  final String name;
-  final String startStop;
-  final String endStop;
+  final String nameEn;
+  final String nameMm;
+  final String startStopEn;
+  final String startStopMm;
+  final String endStopEn;
+  final String endStopMm;
   final List<BusStop> stops;
   final List<Schedule> schedule;
   final double farePrice;
@@ -37,26 +43,36 @@ class BusRoute {
   final String lastUpdated;
   final double confidence;
 
+  String get name => _combined(nameEn, nameMm);
+  String get startStop => _combined(startStopEn, startStopMm);
+  String get endStop => _combined(endStopEn, endStopMm);
+
   factory BusRoute.fromJson(Map<String, dynamic> json) {
-    final stops = (json['stops'] as List<dynamic>? ?? [])
-        .map((stop) => BusStop.fromJson(stop as Map<String, dynamic>))
-        .toList();
+    final legacyName = _splitLegacy(json['name'] as String?);
+    final legacyStart = _splitLegacy(json['startStop'] as String?);
+    final legacyEnd = _splitLegacy(json['endStop'] as String?);
+    final routeId = json['id'] as String;
+    final stops = (json['stops'] as List<dynamic>? ?? []).map((stop) {
+      final busStop = BusStop.fromJson(stop as Map<String, dynamic>);
+      return busStop.routes.isEmpty
+          ? busStop.copyWith(routes: [routeId])
+          : busStop;
+    }).toList();
     final routePath = (json['routePath'] as List<dynamic>?)
-        ?.map(
-          (point) => RouteCoordinate.fromJson(point as Map<String, dynamic>),
-        )
+        ?.map((point) => RouteCoordinate.fromJsonValue(point))
         .toList();
 
     return BusRoute(
-      id: json['id'] as String,
+      id: routeId,
       routeNumber: json['routeNumber'] as String,
-      name: json['name'] as String,
-      startStop: json['startStop'] as String,
-      endStop: json['endStop'] as String,
+      nameEn: json['nameEn'] as String? ?? legacyName.en,
+      nameMm: json['nameMm'] as String? ?? legacyName.mm,
+      startStopEn: json['startStopEn'] as String? ?? legacyStart.en,
+      startStopMm: json['startStopMm'] as String? ?? legacyStart.mm,
+      endStopEn: json['endStopEn'] as String? ?? legacyEnd.en,
+      endStopMm: json['endStopMm'] as String? ?? legacyEnd.mm,
       stops: stops,
-      schedule: (json['schedule'] as List<dynamic>? ?? [])
-          .map((item) => Schedule.fromJson(item as Map<String, dynamic>))
-          .toList(),
+      schedule: _scheduleFromJson(json['schedule'], routeId),
       farePrice: (json['farePrice'] as num).toDouble(),
       isAirCon: json['isAirCon'] as bool,
       color: json['color'] as String,
@@ -83,9 +99,12 @@ class BusRoute {
     return {
       'id': id,
       'routeNumber': routeNumber,
-      'name': name,
-      'startStop': startStop,
-      'endStop': endStop,
+      'nameEn': nameEn,
+      'nameMm': nameMm,
+      'startStopEn': startStopEn,
+      'startStopMm': startStopMm,
+      'endStopEn': endStopEn,
+      'endStopMm': endStopMm,
       'stops': stops.map((stop) => stop.toJson()).toList(),
       'schedule': schedule.map((item) => item.toJson()).toList(),
       'farePrice': farePrice,
@@ -102,9 +121,12 @@ class BusRoute {
   BusRoute copyWith({
     String? id,
     String? routeNumber,
-    String? name,
-    String? startStop,
-    String? endStop,
+    String? nameEn,
+    String? nameMm,
+    String? startStopEn,
+    String? startStopMm,
+    String? endStopEn,
+    String? endStopMm,
     List<BusStop>? stops,
     List<Schedule>? schedule,
     double? farePrice,
@@ -119,9 +141,12 @@ class BusRoute {
     return BusRoute(
       id: id ?? this.id,
       routeNumber: routeNumber ?? this.routeNumber,
-      name: name ?? this.name,
-      startStop: startStop ?? this.startStop,
-      endStop: endStop ?? this.endStop,
+      nameEn: nameEn ?? this.nameEn,
+      nameMm: nameMm ?? this.nameMm,
+      startStopEn: startStopEn ?? this.startStopEn,
+      startStopMm: startStopMm ?? this.startStopMm,
+      endStopEn: endStopEn ?? this.endStopEn,
+      endStopMm: endStopMm ?? this.endStopMm,
       stops: stops ?? this.stops,
       schedule: schedule ?? this.schedule,
       farePrice: farePrice ?? this.farePrice,
@@ -149,7 +174,72 @@ class RouteCoordinate {
     );
   }
 
+  factory RouteCoordinate.fromJsonValue(Object? value) {
+    if (value is List && value.length == 2) {
+      return RouteCoordinate(
+        latitude: (value[0] as num).toDouble(),
+        longitude: (value[1] as num).toDouble(),
+      );
+    }
+    return RouteCoordinate.fromJson(value as Map<String, dynamic>);
+  }
+
   Map<String, dynamic> toJson() {
     return {'latitude': latitude, 'longitude': longitude};
   }
+}
+
+({String en, String mm}) _splitLegacy(String? value) {
+  if (value == null || value.trim().isEmpty) {
+    return (en: '', mm: '');
+  }
+  final parts = value.split('/');
+  if (parts.length < 2) {
+    return (en: value.trim(), mm: '');
+  }
+  return (en: parts.first.trim(), mm: parts.sublist(1).join('/').trim());
+}
+
+String _combined(String en, String mm) {
+  if (mm.trim().isEmpty) {
+    return en;
+  }
+  if (en.trim().isEmpty) {
+    return mm;
+  }
+  return '$en / $mm';
+}
+
+List<Schedule> _scheduleFromJson(Object? value, String routeId) {
+  if (value is List) {
+    return value
+        .map((item) => Schedule.fromJson(item as Map<String, dynamic>))
+        .toList();
+  }
+  if (value is Map<String, dynamic>) {
+    return [
+      _directionScheduleFromJson(value['forward'], routeId, 'forward'),
+      _directionScheduleFromJson(value['return'], routeId, 'reverse'),
+    ];
+  }
+  return [];
+}
+
+Schedule _directionScheduleFromJson(
+  Object? value,
+  String routeId,
+  String direction,
+) {
+  final json = value as Map<String, dynamic>? ?? const {};
+  final times = (json['departureTimes'] as List<dynamic>? ?? [])
+      .map((time) => time as String)
+      .toList();
+  return Schedule(
+    routeId: routeId,
+    direction: RouteDirection.fromJson(direction),
+    departureTimes: times,
+    operatingDays: const ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    firstBus: times.isEmpty ? '' : times.first,
+    lastBus: times.isEmpty ? '' : times.last,
+  );
 }

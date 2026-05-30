@@ -10,8 +10,8 @@ import 'local_database.dart';
 class SeedDataLoader {
   const SeedDataLoader(this._database);
 
-  static const String _seedLoadedKey = 'ybs_seed_data_loaded_v1';
-  static const String _seedAssetPath = 'assets/data/ybs_routes.json';
+  static const String _seedLoadedKey = 'ybs_seed_data_loaded_production_v1';
+  static const String _seedAssetPath = 'assets/data/ybs_routes_production.json';
 
   final LocalDatabase _database;
 
@@ -49,6 +49,11 @@ class SeedDataLoader {
 
     await _database.upsertDataSource(metadata);
     await _database.insertRoutes(routes);
+    await prefs.setString('data_version', metadata.version);
+    await prefs.setString(
+      'data_last_updated',
+      metadata.lastUpdated.toIso8601String(),
+    );
     await prefs.setBool(_seedLoadedKey, true);
   }
 

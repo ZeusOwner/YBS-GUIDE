@@ -13,7 +13,7 @@ class LocalDatabase {
   LocalDatabase._();
 
   static final LocalDatabase instance = LocalDatabase._();
-  static const int _databaseVersion = 4;
+  static const int _databaseVersion = 5;
   static const String _databaseName = 'ybs_guide.db';
 
   Database? _database;
@@ -36,13 +36,23 @@ class LocalDatabase {
   }
 
   Future<void> _onCreate(Database db, int version) async {
+    await createSchema(db);
+  }
+
+  static Future<void> createSchema(Database db) async {
     await db.execute('''
       CREATE TABLE bus_routes (
         id TEXT PRIMARY KEY,
         route_number TEXT NOT NULL,
         name TEXT NOT NULL,
+        name_en TEXT NOT NULL DEFAULT '',
+        name_mm TEXT NOT NULL DEFAULT '',
         start_stop TEXT NOT NULL,
+        start_stop_en TEXT NOT NULL DEFAULT '',
+        start_stop_mm TEXT NOT NULL DEFAULT '',
         end_stop TEXT NOT NULL,
+        end_stop_en TEXT NOT NULL DEFAULT '',
+        end_stop_mm TEXT NOT NULL DEFAULT '',
         fare_price REAL NOT NULL,
         is_air_con INTEGER NOT NULL,
         color TEXT NOT NULL,
@@ -58,10 +68,14 @@ class LocalDatabase {
       CREATE TABLE bus_stops (
         id TEXT PRIMARY KEY,
         name TEXT NOT NULL,
+        name_en TEXT NOT NULL DEFAULT '',
+        name_mm TEXT NOT NULL DEFAULT '',
         latitude REAL NOT NULL,
         longitude REAL NOT NULL,
         routes TEXT NOT NULL,
-        landmark TEXT NOT NULL
+        landmark TEXT NOT NULL,
+        landmark_en TEXT,
+        landmark_mm TEXT
       )
     ''');
 
@@ -136,6 +150,34 @@ class LocalDatabase {
         )
       ''');
     }
+    if (oldVersion < 5) {
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN name_en TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN name_mm TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN start_stop_en TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN start_stop_mm TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN end_stop_en TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN end_stop_mm TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_stops ADD COLUMN name_en TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute(
+        "ALTER TABLE bus_stops ADD COLUMN name_mm TEXT NOT NULL DEFAULT ''",
+      );
+      await db.execute('ALTER TABLE bus_stops ADD COLUMN landmark_en TEXT');
+      await db.execute('ALTER TABLE bus_stops ADD COLUMN landmark_mm TEXT');
+    }
   }
 
   Future<void> insertRoute(BusRoute route) async {
@@ -172,6 +214,75 @@ class LocalDatabase {
     }
   }
 
+  Future<void> upsertRoutesTransaction(List<BusRoute> routes) async {
+    final db = await database;
+    await db.transaction((txn) async {
+      for (final route in routes) {
+        await txn.insert(
+          'bus_routes',
+          _routeToRow(route),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+
+        for (final stop in route.stops) {
+          await txn.insert(
+            'bus_stops',
+            _stopToRow(stop),
+            conflictAlgorithm: ConflictAlgorithm.replace,
+          );
+        }
+
+        await txn.delete(
+          'schedules',
+          where: 'route_id = ?',
+          whereArgs: [route.id],
+        );
+        for (final schedule in route.schedule) {
+          await txn.insert('schedules', _scheduleToRow(schedule));
+        }
+      }
+    });
+  }
+
+  Future<void> upsertRoutesWithDataSourceTransaction(
+    List<BusRoute> routes,
+    DataSourceMetadata metadata,
+  ) async {
+    final db = await database;
+    await db.transaction((txn) async {
+      for (final route in routes) {
+        await txn.insert(
+          'bus_routes',
+          _routeToRow(route),
+          conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+
+        for (final stop in route.stops) {
+          await txn.insert(
+            'bus_stops',
+            _stopToRow(stop),
+            conflictAlgorithm: ConflictAlgorithm.replace,
+          );
+        }
+
+        await txn.delete(
+          'schedules',
+          where: 'route_id = ?',
+          whereArgs: [route.id],
+        );
+        for (final schedule in route.schedule) {
+          await txn.insert('schedules', _scheduleToRow(schedule));
+        }
+      }
+
+      await txn.insert(
+        'data_sources',
+        _metadataToRow(metadata),
+        conflictAlgorithm: ConflictAlgorithm.replace,
+      );
+    });
+  }
+
   Future<List<BusRoute>> getAllRoutes() async {
     final db = await database;
     final rows = await db.query('bus_routes', orderBy: 'route_number ASC');
@@ -198,8 +309,19 @@ class LocalDatabase {
     final rows = await db.query(
       'bus_routes',
       where:
-          'LOWER(route_number) LIKE ? OR LOWER(name) LIKE ? OR LOWER(start_stop) LIKE ? OR LOWER(end_stop) LIKE ?',
-      whereArgs: [value, value, value, value],
+          'LOWER(route_number) LIKE ? OR LOWER(name) LIKE ? OR LOWER(name_en) LIKE ? OR LOWER(name_mm) LIKE ? OR LOWER(start_stop) LIKE ? OR LOWER(start_stop_en) LIKE ? OR LOWER(start_stop_mm) LIKE ? OR LOWER(end_stop) LIKE ? OR LOWER(end_stop_en) LIKE ? OR LOWER(end_stop_mm) LIKE ?',
+      whereArgs: [
+        value,
+        value,
+        value,
+        value,
+        value,
+        value,
+        value,
+        value,
+        value,
+        value,
+      ],
       orderBy: 'route_number ASC',
     );
     return Future.wait(rows.map(_routeFromRow));
@@ -317,8 +439,14 @@ class LocalDatabase {
       'id': route.id,
       'route_number': route.routeNumber,
       'name': route.name,
+      'name_en': route.nameEn,
+      'name_mm': route.nameMm,
       'start_stop': route.startStop,
+      'start_stop_en': route.startStopEn,
+      'start_stop_mm': route.startStopMm,
       'end_stop': route.endStop,
+      'end_stop_en': route.endStopEn,
+      'end_stop_mm': route.endStopMm,
       'fare_price': route.farePrice,
       'is_air_con': route.isAirCon ? 1 : 0,
       'color': route.color,
@@ -337,9 +465,24 @@ class LocalDatabase {
     return BusRoute(
       id: id,
       routeNumber: row['route_number']! as String,
-      name: row['name']! as String,
-      startStop: row['start_stop']! as String,
-      endStop: row['end_stop']! as String,
+      nameEn: _text(row, 'name_en').isEmpty
+          ? _splitLegacy(row['name']! as String).en
+          : _text(row, 'name_en'),
+      nameMm: _text(row, 'name_mm').isEmpty
+          ? _splitLegacy(row['name']! as String).mm
+          : _text(row, 'name_mm'),
+      startStopEn: _text(row, 'start_stop_en').isEmpty
+          ? _splitLegacy(row['start_stop']! as String).en
+          : _text(row, 'start_stop_en'),
+      startStopMm: _text(row, 'start_stop_mm').isEmpty
+          ? _splitLegacy(row['start_stop']! as String).mm
+          : _text(row, 'start_stop_mm'),
+      endStopEn: _text(row, 'end_stop_en').isEmpty
+          ? _splitLegacy(row['end_stop']! as String).en
+          : _text(row, 'end_stop_en'),
+      endStopMm: _text(row, 'end_stop_mm').isEmpty
+          ? _splitLegacy(row['end_stop']! as String).mm
+          : _text(row, 'end_stop_mm'),
       stops: await getStopsByRoute(id),
       schedule: await getSchedulesByRoute(id),
       farePrice: (row['fare_price']! as num).toDouble(),
@@ -361,23 +504,37 @@ class LocalDatabase {
     return {
       'id': stop.id,
       'name': stop.name,
+      'name_en': stop.nameEn,
+      'name_mm': stop.nameMm,
       'latitude': stop.latitude,
       'longitude': stop.longitude,
       'routes': jsonEncode(stop.routes),
       'landmark': stop.landmark,
+      'landmark_en': stop.landmarkEn,
+      'landmark_mm': stop.landmarkMm,
     };
   }
 
   BusStop _stopFromRow(Map<String, Object?> row) {
     return BusStop(
       id: row['id']! as String,
-      name: row['name']! as String,
-      latitude: row['latitude']! as double,
-      longitude: row['longitude']! as double,
+      nameEn: _text(row, 'name_en').isEmpty
+          ? _splitLegacy(row['name']! as String).en
+          : _text(row, 'name_en'),
+      nameMm: _text(row, 'name_mm').isEmpty
+          ? _splitLegacy(row['name']! as String).mm
+          : _text(row, 'name_mm'),
+      latitude: (row['latitude']! as num).toDouble(),
+      longitude: (row['longitude']! as num).toDouble(),
       routes: (jsonDecode(row['routes']! as String) as List<dynamic>)
           .map((routeId) => routeId as String)
           .toList(),
-      landmark: row['landmark']! as String,
+      landmarkEn: _text(row, 'landmark_en').isEmpty
+          ? _splitLegacy(row['landmark']! as String).en
+          : _text(row, 'landmark_en'),
+      landmarkMm: _text(row, 'landmark_mm').isEmpty
+          ? _splitLegacy(row['landmark']! as String).mm
+          : _text(row, 'landmark_mm'),
     );
   }
 
@@ -448,4 +605,16 @@ class LocalDatabase {
       confidence: (row['confidence']! as num).toDouble(),
     );
   }
+}
+
+String _text(Map<String, Object?> row, String key) {
+  return row[key] as String? ?? '';
+}
+
+({String en, String mm}) _splitLegacy(String value) {
+  final parts = value.split('/');
+  if (parts.length < 2) {
+    return (en: value.trim(), mm: '');
+  }
+  return (en: parts.first.trim(), mm: parts.sublist(1).join('/').trim());
 }

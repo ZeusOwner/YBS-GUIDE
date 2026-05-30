@@ -1,10 +1,12 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ybs_guide/data/datasources/local_ybs_datasource.dart';
 import 'package:ybs_guide/data/repositories/ybs_repository.dart';
+
+import '../helpers/test_database_helper.dart';
 
 void main() {
   test('YbsRepository returns routes and route by id', () async {
-    final repository = YbsRepository(LocalYbsDatasource());
+    final sqliteRepository = await TestDatabaseHelper.createSeededRepository();
+    final repository = YbsRepository(sqliteRepository);
 
     final routes = await repository.getRoutes();
     final route = await repository.getRouteById('ybs-36');

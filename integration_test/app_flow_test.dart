@@ -2,9 +2,10 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:integration_test/integration_test.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ybs_guide/data/datasources/local_ybs_datasource.dart';
 import 'package:ybs_guide/data/repositories/ybs_repository.dart';
 import 'package:ybs_guide/main.dart';
+
+import '../test/helpers/test_database_helper.dart';
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
@@ -13,7 +14,8 @@ void main() {
     tester,
   ) async {
     SharedPreferences.setMockInitialValues({});
-    final repository = YbsRepository(LocalYbsDatasource());
+    final sqliteRepository = await TestDatabaseHelper.createSeededRepository();
+    final repository = YbsRepository(sqliteRepository);
 
     await tester.pumpWidget(createYbsGuideApp(repository));
     await tester.pumpAndSettle();
