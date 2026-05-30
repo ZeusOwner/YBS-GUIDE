@@ -3,8 +3,9 @@ import 'package:sqflite/sqflite.dart';
 import '../models/bus_route.dart';
 import '../models/bus_stop.dart';
 import '../models/schedule.dart';
+import '../repositories/route_repository.dart';
 
-class LocalYbsDatasource {
+class LocalYbsDatasource implements RouteRepository {
   Database? _database;
 
   Future<Database?> get database async => _database;
@@ -13,6 +14,10 @@ class LocalYbsDatasource {
     return _sampleRoutes;
   }
 
+  @override
+  Future<List<BusRoute>> getAllRoutes() => getRoutes();
+
+  @override
   Future<BusRoute?> getRouteById(String id) async {
     for (final route in _sampleRoutes) {
       if (route.id == id) {
@@ -26,6 +31,26 @@ class LocalYbsDatasource {
     return _sampleRoutes.expand((route) => route.stops).toList();
   }
 
+  @override
+  Future<List<BusRoute>> searchRoutes(String query) async {
+    final lowerQuery = query.toLowerCase();
+    return _sampleRoutes.where((route) {
+      return route.routeNumber.toLowerCase().contains(lowerQuery) ||
+          route.name.toLowerCase().contains(lowerQuery) ||
+          route.startStop.toLowerCase().contains(lowerQuery) ||
+          route.endStop.toLowerCase().contains(lowerQuery) ||
+          route.stops.any(
+            (stop) => stop.name.toLowerCase().contains(lowerQuery),
+          );
+    }).toList();
+  }
+
+  @override
+  Future<List<BusStop>> getStopsByRoute(String routeId) async {
+    final route = await getRouteById(routeId);
+    return route?.stops ?? [];
+  }
+
   Future<Schedule?> getSchedule(String routeId) async {
     final route = await getRouteById(routeId);
     return route?.schedule.firstOrNull;
@@ -36,9 +61,12 @@ const _sampleRoutes = [
   BusRoute(
     id: 'ybs-36',
     routeNumber: 'YBS-36',
-    name: 'Hledan - Sule / လှည်းတန်း - ဆူးလေ',
-    startStop: 'Hledan',
-    endStop: 'Sule',
+    nameEn: 'Hledan - Sule',
+    nameMm: 'လည်းတန်း - ဆူးလေ',
+    startStopEn: 'Hledan',
+    startStopMm: 'လည်းတန်း',
+    endStopEn: 'Sule',
+    endStopMm: 'ဆူးလေ',
     farePrice: 400,
     isAirCon: false,
     color: '#1B5E20',
@@ -51,19 +79,23 @@ const _sampleRoutes = [
     stops: [
       BusStop(
         id: 'hledan',
-        name: 'Hledan / လှည်းတန်း',
+        nameEn: 'Hledan',
+        nameMm: 'လည်းတန်း',
         latitude: 16.8296,
         longitude: 96.1307,
         routes: ['ybs-36'],
-        landmark: 'Hledan Center',
+        landmarkEn: 'Hledan Center',
+        landmarkMm: 'လည်းတန်းစင်တာ',
       ),
       BusStop(
         id: 'sule',
-        name: 'Sule / ဆူးလေ',
+        nameEn: 'Sule',
+        nameMm: 'ဆူးလေ',
         latitude: 16.7742,
         longitude: 96.1588,
         routes: ['ybs-36'],
-        landmark: 'Sule Pagoda',
+        landmarkEn: 'Sule Pagoda',
+        landmarkMm: 'ဆူးလေဘုရား',
       ),
     ],
     schedule: [
@@ -88,9 +120,12 @@ const _sampleRoutes = [
   BusRoute(
     id: 'ybs-65',
     routeNumber: 'YBS-65',
-    name: 'North Dagon - Downtown / မြောက်ဒဂုံ - မြို့ထဲ',
-    startStop: 'North Dagon',
-    endStop: 'Downtown',
+    nameEn: 'North Dagon - Downtown',
+    nameMm: 'မြောက်ဒဂုံ - မြို့ထဲ',
+    startStopEn: 'North Dagon',
+    startStopMm: 'မြောက်ဒဂုံ',
+    endStopEn: 'Downtown',
+    endStopMm: 'မြို့ထဲ',
     farePrice: 500,
     isAirCon: true,
     color: '#0D47A1',
@@ -103,19 +138,23 @@ const _sampleRoutes = [
     stops: [
       BusStop(
         id: 'north-dagon',
-        name: 'North Dagon / မြောက်ဒဂုံ',
+        nameEn: 'North Dagon',
+        nameMm: 'မြောက်ဒဂုံ',
         latitude: 16.8844,
         longitude: 96.1911,
         routes: ['ybs-65'],
-        landmark: 'North Dagon Market',
+        landmarkEn: 'North Dagon Market',
+        landmarkMm: 'မြောက်ဒဂုံဈေး',
       ),
       BusStop(
         id: 'downtown',
-        name: 'Downtown / မြို့ထဲ',
+        nameEn: 'Downtown',
+        nameMm: 'မြို့ထဲ',
         latitude: 16.7791,
         longitude: 96.1528,
         routes: ['ybs-65'],
-        landmark: 'Yangon City Hall',
+        landmarkEn: 'Yangon City Hall',
+        landmarkMm: 'ရန်ကုန်မြို့တော်ခန်းမ',
       ),
     ],
     schedule: [

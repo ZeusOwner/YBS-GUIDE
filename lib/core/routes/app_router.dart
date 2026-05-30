@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../../presentation/screens/favorites_screen.dart';
 import '../../presentation/screens/home/home_screen.dart';
@@ -9,6 +10,7 @@ import '../../presentation/screens/search_screen.dart';
 import '../../presentation/screens/settings_screen.dart';
 import '../../presentation/screens/trip_planner_screen.dart';
 import '../../presentation/screens/welcome_screen.dart';
+import '../../presentation/viewmodels/home_view_model.dart';
 import '../../presentation/widgets/app_shell.dart';
 import '../../l10n/app_localizations.dart';
 import '../constants/route_names.dart';
@@ -76,6 +78,24 @@ class AppRouter {
       GoRoute(
         path: RouteNames.tripPlanner,
         builder: (context, state) => const TripPlannerScreen(),
+      ),
+      GoRoute(
+        path: '/select-route/:type',
+        builder: (context, state) {
+          final type = state.pathParameters['type'] == 'work' ? 'work' : 'home';
+          return SearchScreen(
+            title: type == 'work' ? 'Set Work Route' : 'Set Home Route',
+            onRouteSelected: (route) async {
+              await context.read<HomeViewModel>().setQuickAccessRoute(
+                type,
+                route.id,
+              );
+              if (context.mounted) {
+                context.pop();
+              }
+            },
+          );
+        },
       ),
     ],
     errorBuilder: (context, state) => Scaffold(

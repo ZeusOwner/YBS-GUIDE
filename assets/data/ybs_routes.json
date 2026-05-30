@@ -3,7 +3,7 @@
     "id": "official_seed",
     "name": "YRTA/JICA-derived seed data",
     "sourceUrl": "https://jicayangonbusta.wordpress.com/up-to-date-information-for-gtfs/",
-    "version": "seed-2026-05-30",
+    "version": "seed-2026-05-30-unicode-v2",
     "lastUpdated": "2026-05-30T00:00:00.000",
     "confidence": 0.6
   },
@@ -11,44 +11,55 @@
     {
       "id": "ybs-1",
       "routeNumber": "YBS-1",
-      "name": "Insein - Shwedagon Area / အင်းစိန် - ရွှေတိဂုံအနီး",
-      "startStop": "Insein",
-      "endStop": "Shwedagon Area",
+      "nameEn": "Insein - Shwedagon Area",
+      "nameMm": "အင်းစိန် - ရွှေတိဂုံအနီး",
+      "startStopEn": "Insein",
+      "startStopMm": "အင်းစိန်",
+      "endStopEn": "Shwedagon Area",
+      "endStopMm": "ရွှေတိဂုံအနီး",
       "farePrice": 400,
       "isAirCon": false,
       "color": "#1B5E20",
       "stops": [
         {
           "id": "insein-market",
-          "name": "Insein Market / အင်းစိန်ဈေး",
+          "nameEn": "Insein Market",
+          "nameMm": "အင်းစိန်ဈေး",
           "latitude": 16.8904,
           "longitude": 96.0999,
           "routes": ["ybs-1"],
-          "landmark": "Insein Market"
+          "landmarkEn": "Insein Market",
+          "landmarkMm": "အင်းစိန်ဈေး"
         },
         {
           "id": "hlaing-campus",
-          "name": "Hlaing Campus / လှိုင်တက္ကသိုလ်",
+          "nameEn": "Hlaing Campus",
+          "nameMm": "လှိုင်တက္ကသိုလ်",
           "latitude": 16.8456,
           "longitude": 96.1287,
           "routes": ["ybs-1", "ybs-2"],
-          "landmark": "Yangon University Hlaing Campus"
+          "landmarkEn": "Yangon University Hlaing Campus",
+          "landmarkMm": "ရန်ကုန်တက္ကသိုလ် လှိုင်နယ်မြေ"
         },
         {
           "id": "myaynigone",
-          "name": "Myaynigone / မြေနီကုန်း",
+          "nameEn": "Myaynigone",
+          "nameMm": "မြေနီကုန်း",
           "latitude": 16.8015,
           "longitude": 96.1435,
           "routes": ["ybs-1", "ybs-3"],
-          "landmark": "Myaynigone Junction"
+          "landmarkEn": "Myaynigone Junction",
+          "landmarkMm": "မြေနီကုန်းလမ်းဆုံ"
         },
         {
           "id": "shwedagon",
-          "name": "Shwedagon Pagoda / ရွှေတိဂုံဘုရား",
+          "nameEn": "Shwedagon Pagoda",
+          "nameMm": "ရွှေတိဂုံဘုရား",
           "latitude": 16.7983,
           "longitude": 96.1496,
           "routes": ["ybs-1"],
-          "landmark": "Shwedagon Pagoda"
+          "landmarkEn": "Shwedagon Pagoda",
+          "landmarkMm": "ရွှေတိဂုံဘုရား"
         }
       ],
       "schedule": [
@@ -73,44 +84,55 @@
     {
       "id": "ybs-2",
       "routeNumber": "YBS-2",
-      "name": "Hlaing - Downtown / လှိုင် - မြို့ထဲ",
-      "startStop": "Hlaing",
-      "endStop": "Downtown",
+      "nameEn": "Hlaing - Downtown",
+      "nameMm": "လှိုင် - မြို့ထဲ",
+      "startStopEn": "Hlaing",
+      "startStopMm": "လှိုင်",
+      "endStopEn": "Downtown",
+      "endStopMm": "မြို့ထဲ",
       "farePrice": 400,
       "isAirCon": false,
       "color": "#1565C0",
       "stops": [
         {
           "id": "hlaing-thiri",
-          "name": "Hlaing Thiri / လှိုင်သီရိ",
+          "nameEn": "Hlaing Thiri",
+          "nameMm": "လှိုင်သီရိ",
           "latitude": 16.8502,
           "longitude": 96.1197,
           "routes": ["ybs-2"],
-          "landmark": "Hlaing Township Office"
+          "landmarkEn": "Hlaing Township Office",
+          "landmarkMm": "လှိုင်မြို့နယ်ရုံး"
         },
         {
           "id": "hlaing-campus",
-          "name": "Hlaing Campus / လှိုင်တက္ကသိုလ်",
+          "nameEn": "Hlaing Campus",
+          "nameMm": "လှိုင်တက္ကသိုလ်",
           "latitude": 16.8456,
           "longitude": 96.1287,
           "routes": ["ybs-1", "ybs-2"],
-          "landmark": "Yangon University Hlaing Campus"
+          "landmarkEn": "Yangon University Hlaing Campus",
+          "landmarkMm": "ရန်ကုန်တက္ကသိုလ် လှိုင်နယ်မြေ"
         },
         {
           "id": "hledan",
-          "name": "Hledan / လှည်းတန်း",
+          "nameEn": "Hledan",
+          "nameMm": "လည်းတန်း",
           "latitude": 16.8296,
           "longitude": 96.1307,
           "routes": ["ybs-2"],
-          "landmark": "Hledan Center"
+          "landmarkEn": "Hledan Center",
+          "landmarkMm": "လည်းတန်းစင်တာ"
         },
         {
           "id": "sule",
-          "name": "Sule / ဆူးလေ",
+          "nameEn": "Sule",
+          "nameMm": "ဆူးလေ",
           "latitude": 16.7742,
           "longitude": 96.1588,
           "routes": ["ybs-2", "ybs-43", "ybs-53"],
-          "landmark": "Sule Pagoda"
+          "landmarkEn": "Sule Pagoda",
+          "landmarkMm": "ဆူးလေဘုရား"
         }
       ],
       "schedule": [
@@ -135,44 +157,55 @@
     {
       "id": "ybs-3",
       "routeNumber": "YBS-3",
-      "name": "Thaketa - Sanchaung / သာကေတ - စမ်းချောင်း",
-      "startStop": "Thaketa",
-      "endStop": "Sanchaung",
+      "nameEn": "Thaketa - Sanchaung",
+      "nameMm": "သာကေတ - စမ်းချောင်း",
+      "startStopEn": "Thaketa",
+      "startStopMm": "သာကေတ",
+      "endStopEn": "Sanchaung",
+      "endStopMm": "စမ်းချောင်း",
       "farePrice": 500,
       "isAirCon": false,
       "color": "#C62828",
       "stops": [
         {
           "id": "thaketa-circle",
-          "name": "Thaketa Circle / သာကေတအဝိုင်း",
+          "nameEn": "Thaketa Circle",
+          "nameMm": "သာကေတအဝိုင်း",
           "latitude": 16.7804,
           "longitude": 96.2119,
           "routes": ["ybs-3"],
-          "landmark": "Thaketa Circle"
+          "landmarkEn": "Thaketa Circle",
+          "landmarkMm": "သာကေတအဝိုင်း"
         },
         {
           "id": "tarmwe",
-          "name": "Tamwe / တာမွေ",
+          "nameEn": "Tamwe",
+          "nameMm": "တာမွေ",
           "latitude": 16.8122,
           "longitude": 96.1734,
           "routes": ["ybs-3"],
-          "landmark": "Tamwe Market"
+          "landmarkEn": "Tamwe Market",
+          "landmarkMm": "တာမွေဈေး"
         },
         {
           "id": "myaynigone",
-          "name": "Myaynigone / မြေနီကုန်း",
+          "nameEn": "Myaynigone",
+          "nameMm": "မြေနီကုန်း",
           "latitude": 16.8015,
           "longitude": 96.1435,
           "routes": ["ybs-1", "ybs-3"],
-          "landmark": "Myaynigone Junction"
+          "landmarkEn": "Myaynigone Junction",
+          "landmarkMm": "မြေနီကုန်းလမ်းဆုံ"
         },
         {
           "id": "sanchaung",
-          "name": "Sanchaung / စမ်းချောင်း",
+          "nameEn": "Sanchaung",
+          "nameMm": "စမ်းချောင်း",
           "latitude": 16.8076,
           "longitude": 96.1327,
           "routes": ["ybs-3"],
-          "landmark": "Sanchaung Street"
+          "landmarkEn": "Sanchaung Street",
+          "landmarkMm": "စမ်းချောင်းလမ်း"
         }
       ],
       "schedule": [
@@ -197,44 +230,55 @@
     {
       "id": "ybs-43",
       "routeNumber": "YBS-43",
-      "name": "Airport - City / လေဆိပ် - မြို့ထဲ",
-      "startStop": "Yangon International Airport",
-      "endStop": "City Centre",
+      "nameEn": "Airport - City",
+      "nameMm": "လေဆိပ် - မြို့ထဲ",
+      "startStopEn": "Yangon International Airport",
+      "startStopMm": "ရန်ကုန်အပြည်ပြည်ဆိုင်ရာလေဆိပ်",
+      "endStopEn": "City Centre",
+      "endStopMm": "မြို့လယ်",
       "farePrice": 500,
       "isAirCon": true,
       "color": "#6A1B9A",
       "stops": [
         {
           "id": "yangon-airport",
-          "name": "Yangon International Airport / ရန်ကုန်အပြည်ပြည်ဆိုင်ရာလေဆိပ်",
+          "nameEn": "Yangon International Airport",
+          "nameMm": "ရန်ကုန်အပြည်ပြည်ဆိုင်ရာလေဆိပ်",
           "latitude": 16.9073,
           "longitude": 96.1332,
           "routes": ["ybs-43"],
-          "landmark": "Airport Terminal"
+          "landmarkEn": "Airport Terminal",
+          "landmarkMm": "လေဆိပ်တာမင်နယ်"
         },
         {
           "id": "eight-mile",
-          "name": "8 Mile / ၈ မိုင်",
+          "nameEn": "8 Mile",
+          "nameMm": "၈ မိုင်",
           "latitude": 16.8661,
           "longitude": 96.1396,
           "routes": ["ybs-43"],
-          "landmark": "8 Mile Junction"
+          "landmarkEn": "8 Mile Junction",
+          "landmarkMm": "၈ မိုင်လမ်းဆုံ"
         },
         {
           "id": "kabaraye",
-          "name": "Kabar Aye / ကမ္ဘာအေး",
+          "nameEn": "Kabar Aye",
+          "nameMm": "ကမ္ဘာအေး",
           "latitude": 16.8575,
           "longitude": 96.1557,
           "routes": ["ybs-43"],
-          "landmark": "Kabar Aye Pagoda"
+          "landmarkEn": "Kabar Aye Pagoda",
+          "landmarkMm": "ကမ္ဘာအေးဘုရား"
         },
         {
           "id": "sule",
-          "name": "Sule / ဆူးလေ",
+          "nameEn": "Sule",
+          "nameMm": "ဆူးလေ",
           "latitude": 16.7742,
           "longitude": 96.1588,
           "routes": ["ybs-2", "ybs-43", "ybs-53"],
-          "landmark": "Sule Pagoda"
+          "landmarkEn": "Sule Pagoda",
+          "landmarkMm": "ဆူးလေဘုရား"
         }
       ],
       "schedule": [
@@ -259,44 +303,55 @@
     {
       "id": "ybs-53",
       "routeNumber": "YBS-53",
-      "name": "North Okkalapa - Downtown / မြောက်ဥက္ကလာပ - မြို့ထဲ",
-      "startStop": "North Okkalapa",
-      "endStop": "Downtown",
+      "nameEn": "North Okkalapa - Downtown",
+      "nameMm": "မြောက်ဥက္ကလာပ - မြို့ထဲ",
+      "startStopEn": "North Okkalapa",
+      "startStopMm": "မြောက်ဥက္ကလာပ",
+      "endStopEn": "Downtown",
+      "endStopMm": "မြို့ထဲ",
       "farePrice": 500,
       "isAirCon": false,
       "color": "#EF6C00",
       "stops": [
         {
           "id": "north-okkalapa",
-          "name": "North Okkalapa / မြောက်ဥက္ကလာပ",
+          "nameEn": "North Okkalapa",
+          "nameMm": "မြောက်ဥက္ကလာပ",
           "latitude": 16.9054,
           "longitude": 96.1632,
           "routes": ["ybs-53"],
-          "landmark": "North Okkalapa Roundabout"
+          "landmarkEn": "North Okkalapa Roundabout",
+          "landmarkMm": "မြောက်ဥက္ကလာပအဝိုင်း"
         },
         {
           "id": "thuwunna",
-          "name": "Thuwunna / သုဝဏ္ဏ",
+          "nameEn": "Thuwunna",
+          "nameMm": "သုဝဏ္ဏ",
           "latitude": 16.8014,
           "longitude": 96.1901,
           "routes": ["ybs-53"],
-          "landmark": "Thuwunna Stadium"
+          "landmarkEn": "Thuwunna Stadium",
+          "landmarkMm": "သုဝဏ္ဏအားကစားကွင်း"
         },
         {
           "id": "botahtaung",
-          "name": "Botahtaung / ဗိုလ်တထောင်",
+          "nameEn": "Botahtaung",
+          "nameMm": "ဗိုလ်တထောင်",
           "latitude": 16.7708,
           "longitude": 96.1715,
           "routes": ["ybs-53"],
-          "landmark": "Botahtaung Pagoda"
+          "landmarkEn": "Botahtaung Pagoda",
+          "landmarkMm": "ဗိုလ်တထောင်ဘုရား"
         },
         {
           "id": "sule",
-          "name": "Sule / ဆူးလေ",
+          "nameEn": "Sule",
+          "nameMm": "ဆူးလေ",
           "latitude": 16.7742,
           "longitude": 96.1588,
           "routes": ["ybs-2", "ybs-43", "ybs-53"],
-          "landmark": "Sule Pagoda"
+          "landmarkEn": "Sule Pagoda",
+          "landmarkMm": "ဆူးလေဘုရား"
         }
       ],
       "schedule": [

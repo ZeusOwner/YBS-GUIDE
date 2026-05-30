@@ -48,6 +48,8 @@ dependencies:
     sdk: flutter
   geolocator: ^14.0.2
   package_info_plus: ^9.0.1
+  http: ^1.6.0
+  crypto: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +78,7 @@ flutter:
 
   assets:
     - assets/data/ybs_routes.json
+    - assets/data/ybs_routes_production.json
     - assets/images/ybs_logo.png
 
   # To add assets to your application, add an assets section, like this:

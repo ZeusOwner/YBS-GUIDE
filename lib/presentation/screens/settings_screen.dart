@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../core/constants/app_constants.dart';
 import '../../data/datasources/local_database.dart';
 import '../../data/models/data_source_metadata.dart';
+import '../../data/services/data_sync_service.dart';
 import '../../l10n/app_localizations.dart';
 import '../viewmodels/app_settings_view_model.dart';
 import '../widgets/app_shell.dart';
@@ -19,13 +20,17 @@ class SettingsScreen extends StatefulWidget {
 
 class _SettingsScreenState extends State<SettingsScreen> {
   String _version = '';
+  String _dataVersion = '0.0.0';
+  String? _lastDataUpdate;
   List<DataSourceMetadata> _dataSources = const [];
+  bool _isCheckingUpdates = false;
 
   @override
   void initState() {
     super.initState();
     _loadVersion();
     _loadDataSources();
+    _loadSyncMetadata();
   }
 
   @override
@@ -37,7 +42,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
       title: l10n.settings,
       child: ListView.builder(
         padding: const EdgeInsets.all(AppSpacing.md),
-        itemCount: 10,
+        itemCount: 12,
         itemBuilder: (context, index) {
           return switch (index) {
             0 => _SectionTitle(title: l10n.language),
@@ -91,7 +96,28 @@ class _SettingsScreenState extends State<SettingsScreen> {
             ),
             6 => const Divider(),
             7 => _SectionTitle(title: 'Route data'),
-            8 => _DataSourceTile(metadata: _dataSources.firstOrNull),
+            8 => _DataSourceTile(
+              metadata: _dataSources.firstOrNull,
+              dataVersion: _dataVersion,
+              lastDataUpdate: _lastDataUpdate,
+            ),
+            9 => ListTile(
+              leading: _isCheckingUpdates
+                  ? const SizedBox(
+                      width: 24,
+                      height: 24,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : const Icon(Icons.sync_rounded),
+              title: const Text('Check for updates'),
+              subtitle: const Text(
+                'Download newer YBS route data if available.',
+              ),
+              minLeadingWidth: 48,
+              enabled: !_isCheckingUpdates,
+              onTap: _isCheckingUpdates ? null : _checkForUpdates,
+            ),
+            10 => const Divider(),
             _ => ListTile(
               leading: const Icon(Icons.info_outline),
               title: const Text(AppConstants.appNameEn),
@@ -102,6 +128,19 @@ class _SettingsScreenState extends State<SettingsScreen> {
         },
       ),
     );
+  }
+
+  Future<void> _loadSyncMetadata() async {
+    final syncService = context.read<DataSyncService>();
+    final dataVersion = await syncService.getLocalDataVersion();
+    final lastDataUpdate = await syncService.getLastUpdated();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _dataVersion = dataVersion;
+      _lastDataUpdate = lastDataUpdate;
+    });
   }
 
   Future<void> _loadDataSources() async {
@@ -133,12 +172,41 @@ class _SettingsScreenState extends State<SettingsScreen> {
       context,
     ).showSnackBar(SnackBar(content: Text(l10n.cacheCleared)));
   }
+
+  Future<void> _checkForUpdates() async {
+    setState(() {
+      _isCheckingUpdates = true;
+    });
+    final result = await context.read<DataSyncService>().checkAndSync();
+    await _loadSyncMetadata();
+    await _loadDataSources();
+    if (!mounted) {
+      return;
+    }
+    setState(() {
+      _isCheckingUpdates = false;
+    });
+    final message = result.success
+        ? result.updated
+              ? 'Route data updated to v${result.version}'
+              : 'Route data is already up to date.'
+        : 'Could not check updates.';
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
+  }
 }
 
 class _DataSourceTile extends StatelessWidget {
-  const _DataSourceTile({required this.metadata});
+  const _DataSourceTile({
+    required this.metadata,
+    required this.dataVersion,
+    required this.lastDataUpdate,
+  });
 
   final DataSourceMetadata? metadata;
+  final String dataVersion;
+  final String? lastDataUpdate;
 
   @override
   Widget build(BuildContext context) {
@@ -160,7 +228,7 @@ class _DataSourceTile extends StatelessWidget {
       leading: const Icon(Icons.dataset_outlined),
       title: Text(value.name),
       subtitle: Text(
-        'Version: ${value.version}\nUpdated: $updated\nConfidence: ${(value.confidence * 100).round()}%',
+        'Data version: v$dataVersion\nLast updated: ${lastDataUpdate ?? updated}\nSource: ${value.version}\nConfidence: ${(value.confidence * 100).round()}%',
       ),
       isThreeLine: true,
       minLeadingWidth: 48,

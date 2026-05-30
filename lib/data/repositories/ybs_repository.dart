@@ -1,19 +1,31 @@
-import '../datasources/local_ybs_datasource.dart';
 import '../models/bus_route.dart';
 import '../models/bus_stop.dart';
 import '../models/schedule.dart';
+import 'route_repository.dart';
 
 class YbsRepository {
-  const YbsRepository(this._datasource);
+  const YbsRepository(this._routes);
 
-  final LocalYbsDatasource _datasource;
+  final RouteRepository _routes;
 
-  Future<List<BusRoute>> getRoutes() => _datasource.getRoutes();
+  Future<List<BusRoute>> getRoutes() => _routes.getAllRoutes();
 
-  Future<BusRoute?> getRouteById(String id) => _datasource.getRouteById(id);
+  Future<BusRoute?> getRouteById(String id) => _routes.getRouteById(id);
 
-  Future<List<BusStop>> getStops() => _datasource.getStops();
+  Future<List<BusStop>> getStops() async {
+    final routes = await _routes.getAllRoutes();
+    return routes
+        .expand((route) => route.stops)
+        .fold<Map<String, BusStop>>({}, (unique, stop) {
+          unique[stop.id] = stop;
+          return unique;
+        })
+        .values
+        .toList();
+  }
 
-  Future<Schedule?> getSchedule(String routeId) =>
-      _datasource.getSchedule(routeId);
+  Future<Schedule?> getSchedule(String routeId) async {
+    final route = await _routes.getRouteById(routeId);
+    return route?.schedule.firstOrNull;
+  }
 }
