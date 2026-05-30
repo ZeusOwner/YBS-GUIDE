@@ -8,6 +8,7 @@ import '../../presentation/screens/route_detail_screen.dart';
 import '../../presentation/screens/search_screen.dart';
 import '../../presentation/screens/settings_screen.dart';
 import '../../presentation/screens/trip_planner_screen.dart';
+import '../../presentation/screens/welcome_screen.dart';
 import '../../presentation/widgets/app_shell.dart';
 import '../../l10n/app_localizations.dart';
 import '../constants/route_names.dart';
@@ -16,8 +17,12 @@ class AppRouter {
   const AppRouter._();
 
   static final GoRouter router = GoRouter(
-    initialLocation: RouteNames.home,
+    initialLocation: RouteNames.welcome,
     routes: [
+      GoRoute(
+        path: RouteNames.welcome,
+        builder: (context, state) => const WelcomeScreen(),
+      ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {
           return AppShell(navigationShell: navigationShell);

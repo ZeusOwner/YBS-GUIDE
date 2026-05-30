@@ -7,6 +7,7 @@ class AppConstants {
   static const String appNameMm = 'ရန်ကုန်ဘတ်စ်ကားလမ်းညွှန်';
   static const String appTitle = appNameEn;
 
+  static const String welcomeRoute = '/welcome';
   static const String homeRoute = '/';
   static const String searchRoute = '/search';
   static const String routeDetailRoute = '/route';

@@ -9,7 +9,8 @@ void main() {
     final repository = YbsRepository(LocalYbsDatasource());
 
     await tester.pumpWidget(createYbsGuideApp(repository));
-    await tester.pumpAndSettle();
+    await tester.pump(const Duration(seconds: 2));
+    await tester.pump();
 
     expect(find.text('YBS Guide'), findsWidgets);
     expect(find.text('WHERE TO?'), findsOneWidget);
