@@ -1,0 +1,62 @@
+{
+  "@@locale": "en",
+  "appName": "YBS Guide",
+  "appNameBurmese": "Yangon Bus Guide",
+  "home": "Home",
+  "search": "Search",
+  "map": "Map",
+  "favorites": "Favorites",
+  "settings": "Settings",
+  "tripPlanner": "Trip Planner",
+  "routeNotFound": "Route not found",
+  "retry": "Retry",
+  "networkErrorTitle": "Network error",
+  "networkErrorMessage": "Please check your connection and try again.",
+  "loading": "Loading",
+  "searchHint": "Search route, stop, or destination",
+  "clear": "Clear",
+  "all": "All",
+  "airConOnly": "Air-con only",
+  "regular": "Regular",
+  "recentSearches": "Recent searches",
+  "noSearchResults": "No YBS routes matched your search.",
+  "tryDifferentSearch": "Try a route number, stop name, or destination.",
+  "fareKyat": "{fare} MMK",
+  "@fareKyat": {
+    "placeholders": {
+      "fare": {"type": "String"}
+    }
+  },
+  "noFavorites": "No saved routes yet",
+  "removedFromFavorites": "Removed from favorites",
+  "undo": "Undo",
+  "language": "Language",
+  "theme": "Theme",
+  "english": "English",
+  "myanmar": "Myanmar",
+  "light": "Light",
+  "dark": "Dark",
+  "system": "System",
+  "clearCache": "Clear cache",
+  "clearCacheDescription": "Clear temporary app data",
+  "cacheCleared": "Cache cleared",
+  "versionLoading": "Version loading...",
+  "findRoutes": "Find routes",
+  "fromStop": "From",
+  "toStop": "To",
+  "noTripResults": "No trip results yet",
+  "directRoute": "Direct route",
+  "transferRoute": "Transfer route",
+  "changeAt": "Change at {stop}",
+  "@changeAt": {
+    "placeholders": {
+      "stop": {"type": "String"}
+    }
+  },
+  "stopsCount": "{count} stops",
+  "@stopsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  }
+}

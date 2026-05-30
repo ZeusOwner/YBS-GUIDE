@@ -1,0 +1,322 @@
+{
+  "metadata": {
+    "id": "official_seed",
+    "name": "YRTA/JICA-derived seed data",
+    "sourceUrl": "https://jicayangonbusta.wordpress.com/up-to-date-information-for-gtfs/",
+    "version": "seed-2026-05-30",
+    "lastUpdated": "2026-05-30T00:00:00.000",
+    "confidence": 0.6
+  },
+  "routes": [
+    {
+      "id": "ybs-1",
+      "routeNumber": "YBS-1",
+      "name": "Insein - Shwedagon Area / အင်းစိန် - ရွှေတိဂုံအနီး",
+      "startStop": "Insein",
+      "endStop": "Shwedagon Area",
+      "farePrice": 400,
+      "isAirCon": false,
+      "color": "#1B5E20",
+      "stops": [
+        {
+          "id": "insein-market",
+          "name": "Insein Market / အင်းစိန်ဈေး",
+          "latitude": 16.8904,
+          "longitude": 96.0999,
+          "routes": ["ybs-1"],
+          "landmark": "Insein Market"
+        },
+        {
+          "id": "hlaing-campus",
+          "name": "Hlaing Campus / လှိုင်တက္ကသိုလ်",
+          "latitude": 16.8456,
+          "longitude": 96.1287,
+          "routes": ["ybs-1", "ybs-2"],
+          "landmark": "Yangon University Hlaing Campus"
+        },
+        {
+          "id": "myaynigone",
+          "name": "Myaynigone / မြေနီကုန်း",
+          "latitude": 16.8015,
+          "longitude": 96.1435,
+          "routes": ["ybs-1", "ybs-3"],
+          "landmark": "Myaynigone Junction"
+        },
+        {
+          "id": "shwedagon",
+          "name": "Shwedagon Pagoda / ရွှေတိဂုံဘုရား",
+          "latitude": 16.7983,
+          "longitude": 96.1496,
+          "routes": ["ybs-1"],
+          "landmark": "Shwedagon Pagoda"
+        }
+      ],
+      "schedule": [
+        {
+          "routeId": "ybs-1",
+          "direction": "forward",
+          "departureTimes": ["05:30", "05:45", "06:00", "06:15", "06:30"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:30",
+          "lastBus": "21:30"
+        },
+        {
+          "routeId": "ybs-1",
+          "direction": "reverse",
+          "departureTimes": ["05:45", "06:00", "06:15", "06:30", "06:45"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:45",
+          "lastBus": "21:45"
+        }
+      ]
+    },
+    {
+      "id": "ybs-2",
+      "routeNumber": "YBS-2",
+      "name": "Hlaing - Downtown / လှိုင် - မြို့ထဲ",
+      "startStop": "Hlaing",
+      "endStop": "Downtown",
+      "farePrice": 400,
+      "isAirCon": false,
+      "color": "#1565C0",
+      "stops": [
+        {
+          "id": "hlaing-thiri",
+          "name": "Hlaing Thiri / လှိုင်သီရိ",
+          "latitude": 16.8502,
+          "longitude": 96.1197,
+          "routes": ["ybs-2"],
+          "landmark": "Hlaing Township Office"
+        },
+        {
+          "id": "hlaing-campus",
+          "name": "Hlaing Campus / လှိုင်တက္ကသိုလ်",
+          "latitude": 16.8456,
+          "longitude": 96.1287,
+          "routes": ["ybs-1", "ybs-2"],
+          "landmark": "Yangon University Hlaing Campus"
+        },
+        {
+          "id": "hledan",
+          "name": "Hledan / လှည်းတန်း",
+          "latitude": 16.8296,
+          "longitude": 96.1307,
+          "routes": ["ybs-2"],
+          "landmark": "Hledan Center"
+        },
+        {
+          "id": "sule",
+          "name": "Sule / ဆူးလေ",
+          "latitude": 16.7742,
+          "longitude": 96.1588,
+          "routes": ["ybs-2", "ybs-43", "ybs-53"],
+          "landmark": "Sule Pagoda"
+        }
+      ],
+      "schedule": [
+        {
+          "routeId": "ybs-2",
+          "direction": "forward",
+          "departureTimes": ["05:20", "05:35", "05:50", "06:05", "06:20"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:20",
+          "lastBus": "22:00"
+        },
+        {
+          "routeId": "ybs-2",
+          "direction": "reverse",
+          "departureTimes": ["05:40", "05:55", "06:10", "06:25", "06:40"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:40",
+          "lastBus": "22:15"
+        }
+      ]
+    },
+    {
+      "id": "ybs-3",
+      "routeNumber": "YBS-3",
+      "name": "Thaketa - Sanchaung / သာကေတ - စမ်းချောင်း",
+      "startStop": "Thaketa",
+      "endStop": "Sanchaung",
+      "farePrice": 500,
+      "isAirCon": false,
+      "color": "#C62828",
+      "stops": [
+        {
+          "id": "thaketa-circle",
+          "name": "Thaketa Circle / သာကေတအဝိုင်း",
+          "latitude": 16.7804,
+          "longitude": 96.2119,
+          "routes": ["ybs-3"],
+          "landmark": "Thaketa Circle"
+        },
+        {
+          "id": "tarmwe",
+          "name": "Tamwe / တာမွေ",
+          "latitude": 16.8122,
+          "longitude": 96.1734,
+          "routes": ["ybs-3"],
+          "landmark": "Tamwe Market"
+        },
+        {
+          "id": "myaynigone",
+          "name": "Myaynigone / မြေနီကုန်း",
+          "latitude": 16.8015,
+          "longitude": 96.1435,
+          "routes": ["ybs-1", "ybs-3"],
+          "landmark": "Myaynigone Junction"
+        },
+        {
+          "id": "sanchaung",
+          "name": "Sanchaung / စမ်းချောင်း",
+          "latitude": 16.8076,
+          "longitude": 96.1327,
+          "routes": ["ybs-3"],
+          "landmark": "Sanchaung Street"
+        }
+      ],
+      "schedule": [
+        {
+          "routeId": "ybs-3",
+          "direction": "forward",
+          "departureTimes": ["05:30", "05:50", "06:10", "06:30", "06:50"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:30",
+          "lastBus": "21:00"
+        },
+        {
+          "routeId": "ybs-3",
+          "direction": "reverse",
+          "departureTimes": ["05:45", "06:05", "06:25", "06:45", "07:05"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:45",
+          "lastBus": "21:15"
+        }
+      ]
+    },
+    {
+      "id": "ybs-43",
+      "routeNumber": "YBS-43",
+      "name": "Airport - City / လေဆိပ် - မြို့ထဲ",
+      "startStop": "Yangon International Airport",
+      "endStop": "City Centre",
+      "farePrice": 500,
+      "isAirCon": true,
+      "color": "#6A1B9A",
+      "stops": [
+        {
+          "id": "yangon-airport",
+          "name": "Yangon International Airport / ရန်ကုန်အပြည်ပြည်ဆိုင်ရာလေဆိပ်",
+          "latitude": 16.9073,
+          "longitude": 96.1332,
+          "routes": ["ybs-43"],
+          "landmark": "Airport Terminal"
+        },
+        {
+          "id": "eight-mile",
+          "name": "8 Mile / ၈ မိုင်",
+          "latitude": 16.8661,
+          "longitude": 96.1396,
+          "routes": ["ybs-43"],
+          "landmark": "8 Mile Junction"
+        },
+        {
+          "id": "kabaraye",
+          "name": "Kabar Aye / ကမ္ဘာအေး",
+          "latitude": 16.8575,
+          "longitude": 96.1557,
+          "routes": ["ybs-43"],
+          "landmark": "Kabar Aye Pagoda"
+        },
+        {
+          "id": "sule",
+          "name": "Sule / ဆူးလေ",
+          "latitude": 16.7742,
+          "longitude": 96.1588,
+          "routes": ["ybs-2", "ybs-43", "ybs-53"],
+          "landmark": "Sule Pagoda"
+        }
+      ],
+      "schedule": [
+        {
+          "routeId": "ybs-43",
+          "direction": "forward",
+          "departureTimes": ["06:00", "06:20", "06:40", "07:00", "07:20"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "06:00",
+          "lastBus": "20:30"
+        },
+        {
+          "routeId": "ybs-43",
+          "direction": "reverse",
+          "departureTimes": ["06:30", "06:50", "07:10", "07:30", "07:50"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "06:30",
+          "lastBus": "21:00"
+        }
+      ]
+    },
+    {
+      "id": "ybs-53",
+      "routeNumber": "YBS-53",
+      "name": "North Okkalapa - Downtown / မြောက်ဥက္ကလာပ - မြို့ထဲ",
+      "startStop": "North Okkalapa",
+      "endStop": "Downtown",
+      "farePrice": 500,
+      "isAirCon": false,
+      "color": "#EF6C00",
+      "stops": [
+        {
+          "id": "north-okkalapa",
+          "name": "North Okkalapa / မြောက်ဥက္ကလာပ",
+          "latitude": 16.9054,
+          "longitude": 96.1632,
+          "routes": ["ybs-53"],
+          "landmark": "North Okkalapa Roundabout"
+        },
+        {
+          "id": "thuwunna",
+          "name": "Thuwunna / သုဝဏ္ဏ",
+          "latitude": 16.8014,
+          "longitude": 96.1901,
+          "routes": ["ybs-53"],
+          "landmark": "Thuwunna Stadium"
+        },
+        {
+          "id": "botahtaung",
+          "name": "Botahtaung / ဗိုလ်တထောင်",
+          "latitude": 16.7708,
+          "longitude": 96.1715,
+          "routes": ["ybs-53"],
+          "landmark": "Botahtaung Pagoda"
+        },
+        {
+          "id": "sule",
+          "name": "Sule / ဆူးလေ",
+          "latitude": 16.7742,
+          "longitude": 96.1588,
+          "routes": ["ybs-2", "ybs-43", "ybs-53"],
+          "landmark": "Sule Pagoda"
+        }
+      ],
+      "schedule": [
+        {
+          "routeId": "ybs-53",
+          "direction": "forward",
+          "departureTimes": ["05:10", "05:25", "05:40", "05:55", "06:10"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:10",
+          "lastBus": "21:20"
+        },
+        {
+          "routeId": "ybs-53",
+          "direction": "reverse",
+          "departureTimes": ["05:30", "05:45", "06:00", "06:15", "06:30"],
+          "operatingDays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+          "firstBus": "05:30",
+          "lastBus": "21:45"
+        }
+      ]
+    }
+  ]
+}

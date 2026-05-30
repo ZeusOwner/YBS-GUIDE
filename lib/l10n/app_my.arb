@@ -1,0 +1,62 @@
+{
+  "@@locale": "my",
+  "appName": "YBS လမ်းညွှန်",
+  "appNameBurmese": "ရန်ကုန်ဘတ်စ်ကားလမ်းညွှန်",
+  "home": "ရှေ့မှာ",
+  "search": "ရှာဖွေမည်",
+  "map": "မြေပုံ",
+  "favorites": "သိမ်းထားသည်",
+  "settings": "ဆက်တင်များ",
+  "tripPlanner": "ခရီးစဉ်ရှာဖွေမည်",
+  "routeNotFound": "လမ်းကြောင်း မတွေ့ပါ",
+  "retry": "ထပ်ကြိုးစားမည်",
+  "networkErrorTitle": "ကွန်ရက်ချိတ်ဆက်မှု ပြဿနာ",
+  "networkErrorMessage": "အင်တာနက်ချိတ်ဆက်မှုကို စစ်ဆေးပြီး ထပ်ကြိုးစားပါ။",
+  "loading": "တင်နေသည်",
+  "searchHint": "လမ်းကြောင်း၊ မှတ်တိုင် သို့မဟုတ် ဦးတည်ရာ ရှာဖွေမည်",
+  "clear": "ရှင်းမည်",
+  "all": "အားလုံး",
+  "airConOnly": "အဲကွန်းသာ",
+  "regular": "ရိုးရိုး",
+  "recentSearches": "လတ်တလော ရှာဖွေမှုများ",
+  "noSearchResults": "ရှာဖွေမှုနှင့် ကိုက်ညီသော YBS လမ်းကြောင်း မတွေ့ပါ။",
+  "tryDifferentSearch": "လမ်းကြောင်းနံပါတ်၊ မှတ်တိုင်အမည် သို့မဟုတ် ဦးတည်ရာဖြင့် ထပ်ရှာပါ။",
+  "fareKyat": "{fare} ကျပ်",
+  "@fareKyat": {
+    "placeholders": {
+      "fare": {"type": "String"}
+    }
+  },
+  "noFavorites": "သိမ်းထားသည့်လမ်းကြောင်းမရှိသေးပါ",
+  "removedFromFavorites": "သိမ်းထားသည်မှ ဖယ်ရှားပြီးပါပြီ",
+  "undo": "ပြန်ယူမည်",
+  "language": "ဘာသာစကား",
+  "theme": "အရောင်စနစ်",
+  "english": "English",
+  "myanmar": "မြန်မာ",
+  "light": "အလင်း",
+  "dark": "အမှောင်",
+  "system": "စနစ်အတိုင်း",
+  "clearCache": "Cache ဖျက်မည်",
+  "clearCacheDescription": "ယာယီသိမ်းထားသော အချက်အလက်များ ဖျက်မည်",
+  "cacheCleared": "Cache ဖျက်ပြီးပါပြီ",
+  "versionLoading": "ဗားရှင်း တင်နေသည်...",
+  "findRoutes": "လမ်းကြောင်းရှာမည်",
+  "fromStop": "စမှတ်",
+  "toStop": "သွားမည့်မှတ်တိုင်",
+  "noTripResults": "လမ်းကြောင်းရလဒ် မရှိသေးပါ",
+  "directRoute": "တိုက်ရိုက်လမ်းကြောင်း",
+  "transferRoute": "ပြောင်းစီးလမ်းကြောင်း",
+  "changeAt": "{stop} တွင် ပြောင်းစီးပါ",
+  "@changeAt": {
+    "placeholders": {
+      "stop": {"type": "String"}
+    }
+  },
+  "stopsCount": "{count} မှတ်တိုင်",
+  "@stopsCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  }
+}
