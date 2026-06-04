@@ -73,7 +73,10 @@ class SearchViewModel extends ChangeNotifier {
           route.name.containsIgnoreCase(trimmedQuery) ||
           route.startStop.containsIgnoreCase(trimmedQuery) ||
           route.endStop.containsIgnoreCase(trimmedQuery) ||
-          route.stops.any((stop) => stop.name.containsIgnoreCase(trimmedQuery));
+          (route.dataConfidence != DataConfidence.terminalOnly &&
+              route.stops.any(
+                (stop) => stop.name.containsIgnoreCase(trimmedQuery),
+              ));
       return matchesQuery && _matchesFilter(route);
     }).toList();
 

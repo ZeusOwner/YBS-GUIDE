@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
+import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:provider/provider.dart';
@@ -51,6 +52,7 @@ class HomeScreen extends StatelessWidget {
               workRoute: viewModel.workRoute,
               nearbyStops: viewModel.nearbyStops,
               nearbyStopsState: viewModel.nearbyStopsState,
+              locationPermissionStatus: viewModel.locationPermissionStatus,
               isLoading: viewModel.isLoading,
               onRefresh: viewModel.refresh,
             );
@@ -120,12 +122,13 @@ class _TopBrandBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.fromLTRB(18, 10, 18, 0),
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: Colors.white.withValues(alpha: 0.9),
+            color: colorScheme.surface.withValues(alpha: 0.92),
             borderRadius: BorderRadius.circular(28),
             boxShadow: const [
               BoxShadow(
@@ -142,7 +145,7 @@ class _TopBrandBar extends StatelessWidget {
                 IconButton(
                   tooltip: 'Settings',
                   icon: const Icon(Icons.menu_rounded),
-                  color: AppColors.textSecondary,
+                  color: colorScheme.onSurfaceVariant,
                   onPressed: () => context.push(RouteNames.settings),
                 ),
                 const SizedBox(width: 2),
@@ -231,6 +234,7 @@ class _HomePanel extends StatelessWidget {
     required this.workRoute,
     required this.nearbyStops,
     required this.nearbyStopsState,
+    required this.locationPermissionStatus,
     required this.isLoading,
     required this.onRefresh,
   });
@@ -242,13 +246,15 @@ class _HomePanel extends StatelessWidget {
   final BusRoute? workRoute;
   final List<NearbyStop> nearbyStops;
   final NearbyStopsState nearbyStopsState;
+  final LocationPermission? locationPermissionStatus;
   final bool isLoading;
   final Future<void> Function() onRefresh;
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Material(
-      color: Colors.white,
+      color: colorScheme.surface,
       borderRadius: const BorderRadius.vertical(top: Radius.circular(30)),
       clipBehavior: Clip.antiAlias,
       elevation: 8,
@@ -264,7 +270,7 @@ class _HomePanel extends StatelessWidget {
                 width: 46,
                 height: 5,
                 decoration: BoxDecoration(
-                  color: const Color(0xFFD4DBD7),
+                  color: colorScheme.outlineVariant,
                   borderRadius: BorderRadius.circular(99),
                 ),
               ),
@@ -287,7 +293,7 @@ class _HomePanel extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             _SearchBar(
-              onSearchTap: () => context.go(RouteNames.search),
+              onSearchTap: () => context.push(RouteNames.assistant),
               onMapTap: () => context.go(RouteNames.map),
             ),
             const SizedBox(height: 18),
@@ -297,7 +303,11 @@ class _HomePanel extends StatelessWidget {
             const SizedBox(height: 18),
             Text('Nearby Stops', style: Theme.of(context).textTheme.titleLarge),
             const SizedBox(height: 10),
-            _NearbyStopCards(state: nearbyStopsState, nearbyStops: nearbyStops),
+            _NearbyStopCards(
+              state: nearbyStopsState,
+              nearbyStops: nearbyStops,
+              locationPermissionStatus: locationPermissionStatus,
+            ),
             const SizedBox(height: 18),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -430,6 +440,7 @@ class _QuickAccessCard extends StatelessWidget {
     final isHome = type == 'home';
     final label = isHome ? 'Home' : 'Work';
     final icon = isHome ? Icons.home_rounded : Icons.work_rounded;
+    final colorScheme = Theme.of(context).colorScheme;
 
     if (route == null) {
       return _DashedQuickAccessCard(
@@ -447,8 +458,9 @@ class _QuickAccessCard extends StatelessWidget {
         height: 78,
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(15),
+          border: Border.all(color: colorScheme.outlineVariant),
           boxShadow: const [
             BoxShadow(
               color: Color(0x1F000000),
@@ -460,7 +472,7 @@ class _QuickAccessCard extends StatelessWidget {
         child: Row(
           children: [
             CircleAvatar(
-              backgroundColor: const Color(0xFFE4F4EF),
+              backgroundColor: colorScheme.primaryContainer,
               child: Icon(icon, color: const Color(0xFF118C7B)),
             ),
             const SizedBox(width: 10),
@@ -481,7 +493,7 @@ class _QuickAccessCard extends StatelessWidget {
                 ],
               ),
             ),
-            const Icon(Icons.chevron_right_rounded, color: Color(0xFF9AA49D)),
+            Icon(Icons.chevron_right_rounded, color: colorScheme.outline),
           ],
         ),
       ),
@@ -528,17 +540,18 @@ class _DashedQuickAccessCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return InkWell(
       borderRadius: BorderRadius.circular(15),
       onTap: onTap,
       child: CustomPaint(
-        painter: _DashedBorderPainter(),
+        painter: _DashedBorderPainter(color: colorScheme.primary),
         child: SizedBox(
           height: 78,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: const Color(0xFF118C7B)),
+              Icon(icon, color: colorScheme.primary),
               const SizedBox(width: 8),
               Flexible(
                 child: Text(
@@ -557,10 +570,14 @@ class _DashedQuickAccessCard extends StatelessWidget {
 }
 
 class _DashedBorderPainter extends CustomPainter {
+  const _DashedBorderPainter({required this.color});
+
+  final Color color;
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = ui.Paint()
-      ..color = const Color(0xFF118C7B)
+      ..color = color
       ..style = ui.PaintingStyle.stroke
       ..strokeWidth = 1.4;
     final rect = RRect.fromRectAndRadius(
@@ -578,37 +595,68 @@ class _DashedBorderPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
+  bool shouldRepaint(covariant _DashedBorderPainter oldDelegate) {
+    return oldDelegate.color != color;
+  }
 }
 
 class _NearbyStopCards extends StatelessWidget {
-  const _NearbyStopCards({required this.state, required this.nearbyStops});
+  const _NearbyStopCards({
+    required this.state,
+    required this.nearbyStops,
+    required this.locationPermissionStatus,
+  });
 
   final NearbyStopsState state;
   final List<NearbyStop> nearbyStops;
+  final LocationPermission? locationPermissionStatus;
 
   @override
   Widget build(BuildContext context) {
+    if (state == NearbyStopsState.idle ||
+        locationPermissionStatus == null ||
+        locationPermissionStatus == LocationPermission.denied ||
+        locationPermissionStatus == LocationPermission.unableToDetermine) {
+      return _NearbyStopsPermissionCard(
+        onTap: () =>
+            context.read<HomeViewModel>().requestLocationAndLoadNearbyStops(),
+      );
+    }
+
     switch (state) {
       case NearbyStopsState.loading:
-      case NearbyStopsState.idle:
         return const Padding(
           padding: EdgeInsets.symmetric(vertical: 14),
           child: Center(child: CircularProgressIndicator()),
         );
+      case NearbyStopsState.idle:
+        return const SizedBox.shrink();
       case NearbyStopsState.permissionDenied:
         return _NearbyMessage(
           message: 'Location permission is needed to find nearby stops.',
           actionLabel: 'Enable Location',
-          onPressed: () => context.read<HomeViewModel>().openLocationSettings(),
+          onPressed:
+              locationPermissionStatus == LocationPermission.deniedForever
+              ? () => context.read<HomeViewModel>().openLocationSettings()
+              : () => context
+                    .read<HomeViewModel>()
+                    .requestLocationAndLoadNearbyStops(),
         );
       case NearbyStopsState.empty:
         return const _NearbyMessage(message: 'No stops found within 800m');
+      case NearbyStopsState.noLocation:
+        return _NearbyMessage(
+          message: 'Location unavailable. Try again after setting GPS.',
+          actionLabel: 'Retry',
+          onPressed: () =>
+              context.read<HomeViewModel>().requestLocationAndLoadNearbyStops(),
+        );
       case NearbyStopsState.error:
         return _NearbyMessage(
           message: 'Unable to load nearby stops',
           actionLabel: 'Retry',
-          onPressed: () => context.read<HomeViewModel>().loadNearbyStops(),
+          onPressed: () =>
+              context.read<HomeViewModel>().requestLocationAndLoadNearbyStops(),
         );
       case NearbyStopsState.ready:
         break;
@@ -619,6 +667,55 @@ class _NearbyStopCards extends StatelessWidget {
         for (final nearbyStop in nearbyStops)
           _NearbyStopCard(nearbyStop: nearbyStop),
       ],
+    );
+  }
+}
+
+class _NearbyStopsPermissionCard extends StatelessWidget {
+  const _NearbyStopsPermissionCard({required this.onTap});
+
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    return Semantics(
+      button: true,
+      label: 'Enable location to find buses near you',
+      child: InkWell(
+        borderRadius: BorderRadius.circular(12),
+        onTap: onTap,
+        child: Container(
+          margin: const EdgeInsets.symmetric(horizontal: 0),
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.green.shade50,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.green.shade200),
+          ),
+          child: Row(
+            children: [
+              Icon(Icons.location_on_outlined, color: Colors.green.shade700),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Text(
+                      'Find buses near you',
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      'Tap to enable location for nearby stops',
+                      style: TextStyle(fontSize: 12, color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.arrow_forward_ios, size: 14, color: Colors.grey),
+            ],
+          ),
+        ),
+      ),
     );
   }
 }
@@ -637,6 +734,8 @@ class _NearbyStopCard extends StatelessWidget {
         ? '${(nearbyStop.distanceMeters / 1000).toStringAsFixed(1)}km'
         : '${nearbyStop.distanceMeters.round()}m';
 
+    final colorScheme = Theme.of(context).colorScheme;
+
     return InkWell(
       borderRadius: BorderRadius.circular(16),
       onTap: nearbyStop.routeIds.isEmpty
@@ -648,9 +747,9 @@ class _NearbyStopCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 10),
         padding: const EdgeInsets.all(14),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: colorScheme.surface,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: const Color(0xFFE2E8E5)),
+          border: Border.all(color: colorScheme.outlineVariant),
         ),
         child: Row(
           children: [
@@ -704,13 +803,14 @@ class _NearbyMessage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Container(
       width: double.infinity,
       padding: const EdgeInsets.all(14),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: colorScheme.surface,
         borderRadius: BorderRadius.circular(16),
-        border: Border.all(color: const Color(0xFFE2E8E5)),
+        border: Border.all(color: colorScheme.outlineVariant),
       ),
       child: Row(
         children: [

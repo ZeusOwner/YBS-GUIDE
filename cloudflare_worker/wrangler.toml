@@ -1,0 +1,12 @@
+name = "ybs-guide-assistant"
+main = "src/index.js"
+compatibility_date = "2026-06-04"
+
+[vars]
+GEMINI_MODEL = "gemini-2.5-flash"
+OPENAI_MODEL = "gpt-4o-mini"
+DAILY_AI_LIMIT = "5"
+
+[[kv_namespaces]]
+binding = "YBS_RATE_LIMITS"
+id = "c1dacb5e9023452fac6ece7f91266c86"

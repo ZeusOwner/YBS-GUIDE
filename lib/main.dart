@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import 'core/constants/app_constants.dart';
@@ -8,10 +9,12 @@ import 'data/datasources/local_database.dart';
 import 'data/datasources/seed_data_loader.dart';
 import 'data/repositories/route_repository.dart';
 import 'data/repositories/ybs_repository.dart';
+import 'data/services/assistant_service.dart';
 import 'data/services/data_sync_service.dart';
 import 'data/services/quick_access_service.dart';
 import 'l10n/app_localizations.dart';
 import 'presentation/viewmodels/app_settings_view_model.dart';
+import 'presentation/viewmodels/assistant_view_model.dart';
 import 'presentation/viewmodels/favorites_view_model.dart';
 import 'presentation/viewmodels/home_view_model.dart';
 import 'presentation/viewmodels/map_view_model.dart';
@@ -21,6 +24,7 @@ import 'presentation/viewmodels/trip_planner_view_model.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  GoogleFonts.config.allowRuntimeFetching = false;
 
   final localDatabase = LocalDatabase.instance;
   final seedDataLoader = SeedDataLoader(localDatabase);
@@ -43,6 +47,7 @@ Widget createYbsGuideApp(YbsRepository repository) {
     providers: [
       Provider<LocalDatabase>.value(value: LocalDatabase.instance),
       Provider<YbsRepository>.value(value: repository),
+      Provider<AssistantService>(create: (_) => AssistantService(repository)),
       Provider<DataSyncService>(create: (_) => DataSyncService()),
       Provider<QuickAccessService>(create: (_) => QuickAccessService()),
       ChangeNotifierProvider(create: (_) => AppSettingsViewModel()..load()),
@@ -54,6 +59,12 @@ Widget createYbsGuideApp(YbsRepository repository) {
         )..load(),
       ),
       ChangeNotifierProvider(create: (_) => SearchViewModel(repository)),
+      ChangeNotifierProvider(
+        create: (context) => AssistantViewModel(
+          repository: repository,
+          assistantService: context.read<AssistantService>(),
+        ),
+      ),
       ChangeNotifierProvider(
         create: (_) => FavoritesViewModel(repository)..load(),
       ),

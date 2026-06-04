@@ -12,6 +12,7 @@ abstract class RouteRepository {
   Future<BusRoute?> getRouteById(String id);
   Future<List<BusRoute>> searchRoutes(String query);
   Future<List<BusStop>> getStopsByRoute(String routeId);
+  Future<List<BusStop>> getAllStops();
 }
 
 class RouteRepositoryImpl implements RouteRepository {
@@ -50,6 +51,22 @@ class RouteRepositoryImpl implements RouteRepository {
   Future<List<BusStop>> getStopsByRoute(String routeId) async {
     try {
       return await _database.getStopsByRoute(routeId);
+    } catch (_) {
+      return [];
+    }
+  }
+
+  @override
+  Future<List<BusStop>> getAllStops() async {
+    try {
+      final routes = await _database.getAllRoutes();
+      final stops = <String, BusStop>{};
+      for (final route in routes) {
+        for (final stop in route.stops) {
+          stops[stop.id] = stop;
+        }
+      }
+      return stops.values.toList();
     } catch (_) {
       return [];
     }
@@ -119,6 +136,7 @@ class SqliteRouteRepository implements RouteRepository {
     return rows.map(_stopFromRow).toList();
   }
 
+  @override
   Future<List<BusStop>> getAllStops() async {
     final rows = await _database.query('bus_stops', orderBy: 'name ASC');
     return rows.map(_stopFromRow).toList();
@@ -195,6 +213,7 @@ class SqliteRouteRepository implements RouteRepository {
       sourceUrl: row['source_url'] as String? ?? '',
       lastUpdated: row['last_updated'] as String? ?? '2026-05-30',
       confidence: ((row['confidence'] as num?) ?? 0.6).toDouble(),
+      dataConfidence: _parseDataConfidence(row['data_confidence'] as String?),
       routePath: (jsonDecode(row['route_path']! as String) as List<dynamic>)
           .map(
             (point) => RouteCoordinate.fromJson(point as Map<String, dynamic>),
@@ -266,6 +285,7 @@ class SqliteRouteRepository implements RouteRepository {
       'source_url': route.sourceUrl,
       'last_updated': route.lastUpdated,
       'confidence': route.confidence,
+      'data_confidence': route.dataConfidence.name,
     };
   }
 
@@ -294,6 +314,13 @@ class SqliteRouteRepository implements RouteRepository {
       'last_bus': schedule.lastBus,
     };
   }
+}
+
+DataConfidence _parseDataConfidence(String? value) {
+  return DataConfidence.values.firstWhere(
+    (confidence) => confidence.name == value,
+    orElse: () => DataConfidence.terminalOnly,
+  );
 }
 
 String _text(Map<String, Object?> row, String key) {

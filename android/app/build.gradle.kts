@@ -24,28 +24,27 @@ android {
 
     defaultConfig {
         applicationId = "com.ybsguide.mm"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        minSdk = "24".toInt()
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0.0"
     }
 
     signingConfigs {
         create("release") {
-            keyAlias = keystoreProperties["keyAlias"] as String? ?: "REPLACE_WITH_KEY_ALIAS"
-            keyPassword = keystoreProperties["keyPassword"] as String? ?: "REPLACE_WITH_KEY_PASSWORD"
+            keyAlias = keystoreProperties["keyAlias"] as String?
+            keyPassword = keystoreProperties["keyPassword"] as String?
             storeFile = (keystoreProperties["storeFile"] as String?)?.let { file(it) }
-            storePassword = keystoreProperties["storePassword"] as String? ?: "REPLACE_WITH_STORE_PASSWORD"
+            storePassword = keystoreProperties["storePassword"] as String?
+            enableV1Signing = true
+            enableV2Signing = true
+            enableV3Signing = true
         }
     }
 
     buildTypes {
         release {
-            signingConfig = if (keystorePropertiesFile.exists()) {
-                signingConfigs.getByName("release")
-            } else {
-                signingConfigs.getByName("debug")
-            }
+            signingConfig = signingConfigs.getByName("release")
             isMinifyEnabled = true
             isShrinkResources = true
             proguardFiles(

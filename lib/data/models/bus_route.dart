@@ -1,6 +1,8 @@
 import 'bus_stop.dart';
 import 'schedule.dart';
 
+enum DataConfidence { verified, estimated, terminalOnly }
+
 class BusRoute {
   const BusRoute({
     required this.id,
@@ -22,6 +24,7 @@ class BusRoute {
         'https://jicayangonbusta.wordpress.com/up-to-date-information-for-gtfs/',
     this.lastUpdated = '2026-05-30',
     this.confidence = 0.6,
+    this.dataConfidence = DataConfidence.terminalOnly,
   });
 
   final String id;
@@ -42,6 +45,7 @@ class BusRoute {
   final String sourceUrl;
   final String lastUpdated;
   final double confidence;
+  final DataConfidence dataConfidence;
 
   String get name => _combined(nameEn, nameMm);
   String get startStop => _combined(startStopEn, startStopMm);
@@ -82,6 +86,7 @@ class BusRoute {
           'https://jicayangonbusta.wordpress.com/up-to-date-information-for-gtfs/',
       lastUpdated: json['lastUpdated'] as String? ?? '2026-05-30',
       confidence: (json['confidence'] as num?)?.toDouble() ?? 0.6,
+      dataConfidence: _parseConfidence(json['dataConfidence'] as String?),
       routePath:
           routePath ??
           stops
@@ -115,6 +120,7 @@ class BusRoute {
       'sourceUrl': sourceUrl,
       'lastUpdated': lastUpdated,
       'confidence': confidence,
+      'dataConfidence': dataConfidence.name,
     };
   }
 
@@ -137,6 +143,7 @@ class BusRoute {
     String? sourceUrl,
     String? lastUpdated,
     double? confidence,
+    DataConfidence? dataConfidence,
   }) {
     return BusRoute(
       id: id ?? this.id,
@@ -157,7 +164,19 @@ class BusRoute {
       sourceUrl: sourceUrl ?? this.sourceUrl,
       lastUpdated: lastUpdated ?? this.lastUpdated,
       confidence: confidence ?? this.confidence,
+      dataConfidence: dataConfidence ?? this.dataConfidence,
     );
+  }
+
+  static DataConfidence _parseConfidence(String? val) {
+    switch (val) {
+      case 'verified':
+        return DataConfidence.verified;
+      case 'estimated':
+        return DataConfidence.estimated;
+      default:
+        return DataConfidence.terminalOnly;
+    }
   }
 }
 

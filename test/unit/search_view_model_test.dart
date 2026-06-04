@@ -11,11 +11,14 @@ void main() {
     final repository = await TestDatabaseHelper.createSeededRepository();
     final viewModel = SearchViewModel(YbsRepository(repository));
 
-    viewModel.search('Hledan');
+    viewModel.search('Insein');
     await Future<void>.delayed(const Duration(milliseconds: 350));
 
     expect(viewModel.filteredRoutes, isNotEmpty);
-    expect(viewModel.filteredRoutes.first.routeNumber, 'YBS-36');
+    expect(
+      viewModel.filteredRoutes.map((route) => route.routeNumber),
+      contains('YBS-36'),
+    );
   });
 
   test('SearchViewModel applies air-con filter', () async {

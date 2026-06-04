@@ -81,13 +81,49 @@ class _TripPlannerScreenState extends State<TripPlannerScreen> {
                 ? Center(child: Text(l10n.noTripResults))
                 : ListView.builder(
                     padding: const EdgeInsets.all(AppSpacing.md),
-                    itemCount: viewModel.results.length,
+                    itemCount:
+                        viewModel.results.length +
+                        (viewModel.resultNote == null ? 0 : 1),
                     itemBuilder: (context, index) {
-                      return _TripResultCard(result: viewModel.results[index]);
+                      final note = viewModel.resultNote;
+                      if (note != null && index == 0) {
+                        return _LimitedResultsNote(note: note);
+                      }
+                      final resultIndex = note == null ? index : index - 1;
+                      return _TripResultCard(
+                        result: viewModel.results[resultIndex],
+                      );
                     },
                   ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _LimitedResultsNote extends StatelessWidget {
+  const _LimitedResultsNote({required this.note});
+
+  final String note;
+
+  @override
+  Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
+    return Padding(
+      padding: const EdgeInsets.only(bottom: AppSpacing.sm),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          color: colorScheme.secondaryContainer,
+          borderRadius: BorderRadius.circular(6),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(AppSpacing.sm),
+          child: Text(
+            note,
+            style: TextStyle(color: colorScheme.onSecondaryContainer),
+          ),
+        ),
       ),
     );
   }

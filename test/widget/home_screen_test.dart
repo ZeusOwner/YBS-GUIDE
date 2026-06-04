@@ -18,5 +18,10 @@ void main() {
     expect(find.text('YBS Guide'), findsWidgets);
     expect(find.text('WHERE TO?'), findsOneWidget);
     expect(find.text('Quick Access'), findsOneWidget);
+
+    await tester.tap(find.text('WHERE TO?'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('YBS Assistant'), findsOneWidget);
   });
 }

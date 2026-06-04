@@ -148,6 +148,8 @@ class _RouteHeader extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
+          const SizedBox(height: AppSpacing.xs),
+          _DataConfidenceBadge(confidence: route.dataConfidence),
           const SizedBox(height: AppSpacing.md),
           Wrap(
             spacing: AppSpacing.sm,
@@ -171,6 +173,47 @@ class _RouteHeader extends StatelessWidget {
   }
 }
 
+class _DataConfidenceBadge extends StatelessWidget {
+  const _DataConfidenceBadge({required this.confidence});
+
+  final DataConfidence confidence;
+
+  @override
+  Widget build(BuildContext context) {
+    final config = switch (confidence) {
+      DataConfidence.terminalOnly => (
+        label: 'Terminal data only - intermediate stops not available',
+        background: Colors.orange.shade100,
+        foreground: Colors.orange.shade900,
+      ),
+      DataConfidence.estimated => (
+        label: 'Stop data from community sources',
+        background: Colors.blue.shade50,
+        foreground: Colors.blue.shade900,
+      ),
+      DataConfidence.verified => (
+        label: 'Verified route data',
+        background: Colors.green.shade50,
+        foreground: Colors.green.shade900,
+      ),
+    };
+
+    return DecoratedBox(
+      decoration: BoxDecoration(
+        color: config.background,
+        borderRadius: BorderRadius.circular(4),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+        child: Text(
+          config.label,
+          style: TextStyle(fontSize: 11, color: config.foreground),
+        ),
+      ),
+    );
+  }
+}
+
 class _InfoChip extends StatelessWidget {
   const _InfoChip({required this.label});
 
@@ -178,10 +221,11 @@ class _InfoChip extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colorScheme = Theme.of(context).colorScheme;
     return Chip(
       label: Text(label),
-      backgroundColor: Colors.white,
-      labelStyle: const TextStyle(color: AppColors.primary),
+      backgroundColor: colorScheme.surface,
+      labelStyle: TextStyle(color: colorScheme.primary),
     );
   }
 }

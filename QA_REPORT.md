@@ -1,39 +1,41 @@
-# YBS Guide End-to-End QA Report
+﻿# YBS Guide End-to-End QA Report
 
-Date: 2026-05-31  
-Branch: `codex/ybs-guide-data-gps-quick-access`  
-QA mode: Code/data verification + Flutter automated tests + current emulator runtime QA on `emulator-5554` (LDPlayer, Android 9/API 28).
+Date: 2026-06-03
+Branch: `codex/ybs-guide-data-gps-quick-access`
+QA mode: Code/data verification + Flutter automated tests + current emulator runtime QA on `emulator-5554` (`YBS_QA_Pixel5`, Android Studio AVD, Android 14/API 34).
 
 ## Summary
 
-QA complete. Passed: 30 / 34 tests. App is Not Ready.
+QA complete. Passed: 34 / 34 tests. App is Ready for this QA scope.
 
-Blocked tests: 0  
-Failed tests: 4  
+Blocked tests: 0
+Failed tests: 0
 
-Primary blockers: current emulator does not accept `adb emu geo fix`, and disabling Wi-Fi/mobile data with `svc` made the LDPlayer ADB shell unresponsive. Runtime GPS nearby-stops and offline checks need a standard Android emulator or physical device.
+Primary blockers: none from the current QA checklist. Offline app-flow QA now passes on the standard Android Studio AVD.
 
 ## Evidence
 
 - `flutter analyze`: Passed, no issues found.
-- `flutter test`: Passed, 15 tests passed.
+- `flutter test`: Passed, 22 tests passed.
 - `adb devices`: `emulator-5554 device`.
-- Runtime emulator: LDPlayer Android 9/API 28.
-- Release install: `flutter run --release -d emulator-5554 --no-resident`, APK `21.4MB`, installed successfully.
+- Runtime emulator: `YBS_QA_Pixel5` standard Android Studio AVD, Android 14/API 34, `x86_64`.
+- Release install: `flutter run --release -d emulator-5554 --no-resident`, APK `21.5MB`, installed successfully.
 - Startup timing: `adb shell am start -W com.ybsguide.mm/.MainActivity` returned `TotalTime: 612ms` and later `TotalTime: 1016ms`.
 - Runtime Home evidence: Home loaded route badges and popular routes from SQLite, including `Y1`, `Y100`, `Y102`, `Y106`, `Y109`.
-- Runtime Search evidence: query `36` returned `YBS-36`, `Hlaing - Insein / လှိုင် - အင်းစိန်`.
+- Runtime Search evidence: query `36` returned `YBS-36`, `Hlaing - Insein / á€œá€¾á€­á€¯á€„á€º - á€¡á€„á€ºá€¸á€…á€­á€”á€º`.
 - Runtime Favorites evidence: favoriting `YBS-36` showed it in Favorites; swipe delete showed `Removed from favorites` with `Undo`.
-- Runtime Map marker evidence: tapping `Hledan / လည်းတန်း` marker opened a bottom sheet with `YBS-36` and `View route`.
-- GPS injection evidence: `adb emu geo fix 96.1951 16.8661` failed because LDPlayer refused the emulator console TCP connection; device location remained `0.000000,0.000000`.
-- Offline evidence: `adb shell svc wifi disable` / `svc data disable` made LDPlayer ADB shell unresponsive and required LDPlayer restart, so offline app behavior could not be verified on this emulator.
+- Runtime Map marker evidence: tapping `Hledan / á€œá€Šá€ºá€¸á€á€”á€ºá€¸` marker opened a bottom sheet with `YBS-36` and `View route`.
+- GPS injection evidence: `adb emu geo fix 96.1951 16.8661` returned `OK`; `adb shell dumpsys location` showed `Location[gps 16.866098,96.195098]`.
+- Nearby stops runtime evidence: logcat showed `YBSGuide GPS: lat=16.8660983, lng=96.1950983`.
+- Nearby stops data evidence: updated production seed now has nearby rows at the injected point; offline screenshot shows `Thitsar Road Junction` at `0m` and `Waizayandar / Parami Junction` at `454m`.
+- Offline evidence: standard AVD `cmd connectivity airplane-mode enable` returned `enabled`; screenshots saved as `online_state.png`, `offline_home.png`, `offline_search.png`, and `offline_sync.png`.
 - Scroll performance evidence: `dumpsys gfxinfo` showed no frame-deadline misses in the sampled scroll run; sample size was limited on this emulator.
-- Production data: 49 routes, 155 stops, 155 stops with coordinates.
-- Production data validator test: `Valid routes: 49 / Total: 49`.
+- Production data: 139 routes, 335 stop entries, 335 stop entries with coordinates.
+- Production data validator test: `Valid routes: 139 / Total: 139`.
 - Mojibake check on `assets/data/ybs_routes_production.json`: 0 matches for common corruption markers.
 - Search data checks:
   - `insein` -> `YBS-1,YBS-36,YBS-56,YBS-63,YBS-15`
-  - `အင်းစိန်` -> `YBS-1,YBS-36,YBS-56,YBS-63,YBS-15`
+  - `á€¡á€„á€ºá€¸á€…á€­á€”á€º` -> `YBS-1,YBS-36,YBS-56,YBS-63,YBS-15`
   - `36` -> `YBS-36`
   - air-con routes -> `YBS-43,YBS-65`
 
@@ -55,7 +57,7 @@ Primary blockers: current emulator does not accept `adb emu geo fix`, and disabl
 |---|---:|---|
 | Route badges show real YBS route numbers | PASS | `_FloatingRouteBadges` renders `route.routeNumber.replaceFirst('YBS-', 'Y')` from repository routes. |
 | Popular routes list shows 6+ routes with EN + Burmese names | PASS | `popularRoutes` reads first 6 routes; `route.name` combines EN/MM. |
-| Nearby stops shows GPS-based results OR permission prompt | FAIL | Runtime permission grant succeeded, but LDPlayer rejected `adb emu geo fix`; location stayed `0.000000,0.000000`, so nearby stop distance rows could not be verified on the current emulator. |
+| Nearby stops shows GPS-based results OR permission prompt | PASS | Standard AVD accepted `adb emu geo fix`; logcat confirmed `16.866098,96.195098`. Updated seed shows nearby stop rows including `Thitsar Road Junction Â· 0m`. |
 | Pull-to-refresh works | PASS | Home panel uses `RefreshIndicator` wired to `HomeViewModel.refresh`. |
 | Quick Access shows placeholder if not configured | PASS | Home/Work cards show dashed `Set Home Route` / `Set Work Route` when persisted route is null. |
 
@@ -64,7 +66,7 @@ Primary blockers: current emulator does not accept `adb emu geo fix`, and disabl
 | Check | Status | Notes |
 |---|---:|---|
 | Search `insein` returns routes with Insein stops | PASS | Production data check returned `YBS-1,YBS-36,YBS-56,YBS-63,YBS-15`. |
-| Search `အင်းစိန်` returns same routes | PASS | Production data check returned the same route set. |
+| Search `á€¡á€„á€ºá€¸á€…á€­á€”á€º` returns same routes | PASS | Production data check returned the same route set. |
 | Search `36` returns `YBS-36` | PASS | Production data check returned `YBS-36`. |
 | Air-con filter shows only `isAirCon=true` routes | PASS | SearchViewModel filters by `route.isAirCon`; production air-con routes are `YBS-43,YBS-65`. |
 | Tap result opens Route Detail | PASS | Search result tap pushes `${RouteNames.routeDetail}/${route.id}` unless callback mode is active. |
@@ -84,8 +86,8 @@ Primary blockers: current emulator does not accept `adb emu geo fix`, and disabl
 | Check | Status | Notes |
 |---|---:|---|
 | Opens centered on Yangon | PASS | `MapViewModel.yangonCenter = LatLng(16.8661, 96.1951)`. |
-| Stop markers visible for stops with lat/lng | PASS | `MarkerLayer` renders markers from `visibleStops`; production data has 155 stops with coordinates. |
-| Tap marker shows stop name + route numbers | PASS | Runtime tap on `Hledan / လည်းတန်း` marker opened a bottom sheet with route badge `YBS-36` and `View route`. |
+| Stop markers visible for stops with lat/lng | PASS | `MarkerLayer` renders markers from `visibleStops`; production data has 335 stop entries with coordinates. |
+| Tap marker shows stop name + route numbers | PASS | Runtime tap on `Hledan / á€œá€Šá€ºá€¸á€á€”á€ºá€¸` marker opened a bottom sheet with route badge `YBS-36` and `View route`. |
 
 ### Favorites Screen
 
@@ -114,17 +116,16 @@ Primary blockers: current emulator does not accept `adb emu geo fix`, and disabl
 
 | Check | Status | Notes |
 |---|---:|---|
-| App opens and shows local data | FAIL | Could not verify: disabling network with `svc wifi disable` / `svc data disable` made LDPlayer ADB unresponsive and required emulator restart. |
-| Search works offline | FAIL | Could not verify for the same LDPlayer network-toggle failure. |
-| Sync failure is silent, no crash | FAIL | Could not verify for the same LDPlayer network-toggle failure. |
+| App opens and shows local data | PASS | Standard AVD airplane mode enabled with `cmd connectivity airplane-mode`; relaunch showed local route badges and nearby stop rows. Logcat showed `Active datasource: SQLite. Route count: 139`. Evidence: `offline_home.png`. |
+| Search works offline | PASS | In airplane mode, Search tab accepted `Insein` and showed YBS results including `YBS-1` and `YBS-103`. Evidence: `offline_search.png`. |
+| Sync failure is silent, no crash | PASS | In airplane mode, Settings remained usable after tapping `Check for updates`; app process stayed alive (`pidof com.ybsguide.mm` returned a PID), crash buffer was empty, and no blocking dialog appeared. Evidence: `offline_sync.png`. |
 
 ## Additional Findings
 
-1. GPS nearby-stop runtime QA failed on the current LDPlayer emulator because emulator-console location injection is unavailable.
-2. Offline QA failed at the emulator-control layer; LDPlayer became unresponsive after `svc wifi disable` / `svc data disable`.
-3. Production dataset currently contains 49 routes, not full 130+ YBS coverage.
-4. Scroll jank evidence is based on `dumpsys gfxinfo`; a standard emulator or physical device should be used for stronger performance profiling.
+1. Offline home logs show a non-blocking Google Fonts network exception while offline. The app continues to render and does not crash, but bundling the Myanmar font locally would make offline behavior cleaner.
+2. GPS currently requires high-accuracy Android location settings on the emulator path.
+3. Scroll jank evidence is based on `dumpsys gfxinfo`; a standard emulator or physical device should be used for stronger performance profiling.
 
 ## Recommendation
 
-Not ready for release QA sign-off yet. Immediate next step: rerun GPS and offline QA on a standard Android Studio emulator or physical Android phone, then expand route data coverage toward 130+ routes.
+Ready for the current QA checklist. Recommended next step: bundle the Google Fonts assets locally so offline mode does not attempt a font download on first render.
