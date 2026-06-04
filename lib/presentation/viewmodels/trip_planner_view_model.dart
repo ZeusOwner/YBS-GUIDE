@@ -30,6 +30,7 @@ class TripPlannerViewModel extends ChangeNotifier {
   BusStop? origin;
   BusStop? destination;
   List<TripPlanResult> results = [];
+  String? resultNote;
   bool isLoading = false;
 
   Future<void> load() async {
@@ -72,6 +73,7 @@ class TripPlannerViewModel extends ChangeNotifier {
     final to = destination;
     if (from == null || to == null || from.id == to.id) {
       results = [];
+      resultNote = null;
       notifyListeners();
       return;
     }
@@ -79,6 +81,12 @@ class TripPlannerViewModel extends ChangeNotifier {
     final directResults = _findDirectRoutes(from, to);
     final transferResults = _findTransferRoutes(from, to);
     results = [...directResults, ...transferResults];
+    resultNote =
+        routes.any(
+          (route) => route.dataConfidence == DataConfidence.terminalOnly,
+        )
+        ? 'Limited results - some routes have incomplete stop data'
+        : null;
     notifyListeners();
   }
 
@@ -101,10 +109,14 @@ class TripPlannerViewModel extends ChangeNotifier {
   List<TripPlanResult> _findTransferRoutes(BusStop from, BusStop to) {
     final results = <TripPlanResult>[];
     final originRoutes = routes.where(
-      (route) => _routeContainsStop(route, from.id),
+      (route) =>
+          route.dataConfidence != DataConfidence.terminalOnly &&
+          _routeContainsStop(route, from.id),
     );
     final destinationRoutes = routes.where(
-      (route) => _routeContainsStop(route, to.id),
+      (route) =>
+          route.dataConfidence != DataConfidence.terminalOnly &&
+          _routeContainsStop(route, to.id),
     );
 
     for (final firstRoute in originRoutes) {

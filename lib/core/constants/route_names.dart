@@ -6,6 +6,7 @@ class RouteNames {
   static const String welcome = AppConstants.welcomeRoute;
   static const String home = AppConstants.homeRoute;
   static const String search = AppConstants.searchRoute;
+  static const String assistant = AppConstants.assistantRoute;
   static const String favorites = AppConstants.favoritesRoute;
   static const String map = AppConstants.mapRoute;
   static const String routeDetail = AppConstants.routeDetailRoute;

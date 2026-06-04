@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
@@ -8,7 +10,15 @@ import '../../data/repositories/ybs_repository.dart';
 import '../../data/services/data_sync_service.dart';
 import '../../data/services/quick_access_service.dart';
 
-enum NearbyStopsState { idle, loading, permissionDenied, ready, empty, error }
+enum NearbyStopsState {
+  idle,
+  loading,
+  permissionDenied,
+  ready,
+  empty,
+  noLocation,
+  error,
+}
 
 class NearbyStop {
   const NearbyStop({
@@ -37,6 +47,7 @@ class HomeViewModel extends ChangeNotifier {
   List<BusRoute> routes = [];
   List<NearbyStop> nearbyStops = [];
   NearbyStopsState nearbyStopsState = NearbyStopsState.idle;
+  LocationPermission? locationPermissionStatus;
   BusRoute? homeRoute;
   BusRoute? workRoute;
   bool isLoading = false;
@@ -53,29 +64,27 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
     final results = await Future.wait([
       _repository.getRoutes(),
-      _hasLocationPermission(),
+      _checkLocationPermission(),
     ]);
     routes = results[0] as List<BusRoute>;
-    isLocationPermissionGranted = results[1] as bool;
+    locationPermissionStatus = results[1] as LocationPermission;
+    isLocationPermissionGranted = _isLocationGranted(locationPermissionStatus);
     await _loadQuickAccessRoutes();
     isLoading = false;
     notifyListeners();
 
-    await loadNearbyStops();
     _startBackgroundSync();
   }
 
   Future<void> refresh() => load();
 
-  Future<void> loadNearbyStops() async {
+  Future<void> requestLocationAndLoadNearbyStops() async {
     nearbyStopsState = NearbyStopsState.loading;
     notifyListeners();
 
     try {
       var permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        permission = await Geolocator.requestPermission();
-      }
+      locationPermissionStatus = permission;
       if (permission == LocationPermission.denied ||
           permission == LocationPermission.deniedForever) {
         isLocationPermissionGranted = false;
@@ -86,11 +95,60 @@ class HomeViewModel extends ChangeNotifier {
       }
 
       isLocationPermissionGranted = true;
-      final position = await Geolocator.getCurrentPosition(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.medium,
-        ),
-      );
+      await loadNearbyStops();
+    } catch (_) {
+      nearbyStops = [];
+      nearbyStopsState = NearbyStopsState.error;
+      notifyListeners();
+    }
+  }
+
+  Future<void> loadNearbyStops() async {
+    nearbyStopsState = NearbyStopsState.loading;
+    notifyListeners();
+
+    try {
+      final permission = await _checkLocationPermission();
+      locationPermissionStatus = permission;
+      if (!_isLocationGranted(permission)) {
+        isLocationPermissionGranted = false;
+        nearbyStops = [];
+        nearbyStopsState = NearbyStopsState.permissionDenied;
+        notifyListeners();
+        return;
+      }
+
+      isLocationPermissionGranted = true;
+      Position position;
+      try {
+        position = await Geolocator.getCurrentPosition(
+          locationSettings: _nearbyLocationSettings,
+        );
+        debugPrint(
+          'YBSGuide GPS: lat=${position.latitude}, lng=${position.longitude}',
+        );
+      } on TimeoutException {
+        debugPrint(
+          'YBSGuide GPS: timeout - falling back to last known position',
+        );
+        final lastPosition = await Geolocator.getLastKnownPosition();
+        if (lastPosition == null) {
+          nearbyStops = [];
+          nearbyStopsState = NearbyStopsState.noLocation;
+          notifyListeners();
+          return;
+        }
+        position = lastPosition;
+        debugPrint(
+          'YBSGuide GPS: lat=${position.latitude}, lng=${position.longitude}',
+        );
+      } catch (error) {
+        debugPrint('YBSGuide GPS ERROR: $error');
+        nearbyStops = [];
+        nearbyStopsState = NearbyStopsState.error;
+        notifyListeners();
+        return;
+      }
       final stops = await _repository.getStops();
       final sourceRoutes = routes.isEmpty
           ? await _repository.getRoutes()
@@ -145,6 +203,21 @@ class HomeViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
+  LocationSettings get _nearbyLocationSettings {
+    if (defaultTargetPlatform == TargetPlatform.android) {
+      return AndroidSettings(
+        accuracy: LocationAccuracy.high,
+        timeLimit: const Duration(seconds: 10),
+        forceLocationManager: true,
+      );
+    }
+
+    return const LocationSettings(
+      accuracy: LocationAccuracy.medium,
+      timeLimit: Duration(seconds: 10),
+    );
+  }
+
   Future<void> openLocationSettings() async {
     await Geolocator.openAppSettings();
   }
@@ -190,14 +263,17 @@ class HomeViewModel extends ChangeNotifier {
     });
   }
 
-  Future<bool> _hasLocationPermission() async {
+  Future<LocationPermission> _checkLocationPermission() async {
     try {
-      final permission = await Geolocator.checkPermission();
-      return permission == LocationPermission.always ||
-          permission == LocationPermission.whileInUse;
+      return await Geolocator.checkPermission();
     } catch (_) {
-      return false;
+      return LocationPermission.denied;
     }
+  }
+
+  bool _isLocationGranted(LocationPermission? permission) {
+    return permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse;
   }
 
   Future<void> _loadQuickAccessRoutes() async {

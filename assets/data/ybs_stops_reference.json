@@ -1,0 +1,1902 @@
+{
+  "metadata": {
+    "source": "assets/data/ybs_routes_production.json",
+    "generatedAt": "2026-06-03T00:00:00.000",
+    "dedupeDistanceMeters": 50,
+    "stopCount": 84
+  },
+  "stops": [
+    {
+      "id": "stop-8-mile",
+      "nameEn": "8 Mile",
+      "nameMm": "၈ မိုင်",
+      "latitude": 16.8661,
+      "longitude": 96.1396,
+      "landmarkEn": "8 Mile",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-33",
+        "ybs-43",
+        "ybs-72"
+      ],
+      "routeNumbers": [
+        "YBS-33",
+        "YBS-43",
+        "YBS-72"
+      ]
+    },
+    {
+      "id": "stop-airport",
+      "nameEn": "Airport",
+      "nameMm": "ရန်ကုန်လေဆိပ်",
+      "latitude": 16.9073,
+      "longitude": 96.1332,
+      "landmarkEn": "Airport",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-43"
+      ],
+      "routeNumbers": [
+        "YBS-43"
+      ]
+    },
+    {
+      "id": "stop-aung-mingalar",
+      "nameEn": "Aung Mingalar",
+      "nameMm": "အောင်မင်္ဂလာ",
+      "latitude": 16.934,
+      "longitude": 96.157,
+      "landmarkEn": "Aung Mingalar",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-33",
+        "ybs-51",
+        "ybs-188"
+      ],
+      "routeNumbers": [
+        "YBS-33",
+        "YBS-51",
+        "YBS-188"
+      ]
+    },
+    {
+      "id": "stop-bahan",
+      "nameEn": "Bahan",
+      "nameMm": "ဗဟန်း",
+      "latitude": 16.807,
+      "longitude": 96.157,
+      "landmarkEn": "Bahan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-6",
+        "ybs-38",
+        "ybs-66"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-38",
+        "YBS-66"
+      ]
+    },
+    {
+      "id": "stop-bahan",
+      "nameEn": "Bahan",
+      "nameMm": "?????",
+      "latitude": 16.8169,
+      "longitude": 96.1534,
+      "landmarkEn": "Bahan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-10",
+        "ybs-13",
+        "ybs-32",
+        "ybs-35",
+        "ybs-54",
+        "ybs-57",
+        "ybs-76",
+        "ybs-79",
+        "ybs-98",
+        "ybs-101",
+        "ybs-120",
+        "ybs-123"
+      ],
+      "routeNumbers": [
+        "YBS-10",
+        "YBS-13",
+        "YBS-32",
+        "YBS-35",
+        "YBS-54",
+        "YBS-57",
+        "YBS-76",
+        "YBS-79",
+        "YBS-98",
+        "YBS-101",
+        "YBS-120",
+        "YBS-123"
+      ]
+    },
+    {
+      "id": "stop-bayintnaung",
+      "nameEn": "Bayintnaung",
+      "nameMm": "ဘုရင့်နောင်",
+      "latitude": 16.8672,
+      "longitude": 96.1075,
+      "landmarkEn": "Bayintnaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-1",
+        "ybs-36",
+        "ybs-88"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-36",
+        "YBS-88"
+      ]
+    },
+    {
+      "id": "stop-bogyoke-market",
+      "nameEn": "Bogyoke Market",
+      "nameMm": "ဗိုလ်ချုပ်ဈေး",
+      "latitude": 16.7801,
+      "longitude": 96.1553,
+      "landmarkEn": "Bogyoke Market",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-9",
+        "ybs-33",
+        "ybs-38",
+        "ybs-66"
+      ],
+      "routeNumbers": [
+        "YBS-9",
+        "YBS-33",
+        "YBS-38",
+        "YBS-66"
+      ]
+    },
+    {
+      "id": "stop-botahtaung",
+      "nameEn": "Botahtaung",
+      "nameMm": "ဗိုလ်တထောင်",
+      "latitude": 16.7708,
+      "longitude": 96.1715,
+      "landmarkEn": "Botahtaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-2",
+        "ybs-15",
+        "ybs-37",
+        "ybs-40",
+        "ybs-53",
+        "ybs-56",
+        "ybs-72",
+        "ybs-80",
+        "ybs-102",
+        "ybs-110",
+        "ybs-174"
+      ],
+      "routeNumbers": [
+        "YBS-2",
+        "YBS-15",
+        "YBS-37",
+        "YBS-40",
+        "YBS-53",
+        "YBS-56",
+        "YBS-72",
+        "YBS-80",
+        "YBS-102",
+        "YBS-110",
+        "YBS-174"
+      ]
+    },
+    {
+      "id": "stop-botahtaung",
+      "nameEn": "Botahtaung",
+      "nameMm": "???????????",
+      "latitude": 16.7747,
+      "longitude": 96.1683,
+      "landmarkEn": "Botahtaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-20",
+        "ybs-37",
+        "ybs-42",
+        "ybs-55",
+        "ybs-64",
+        "ybs-65",
+        "ybs-77",
+        "ybs-86",
+        "ybs-99",
+        "ybs-108",
+        "ybs-121",
+        "ybs-218"
+      ],
+      "routeNumbers": [
+        "YBS-20",
+        "YBS-37",
+        "YBS-42",
+        "YBS-55",
+        "YBS-64",
+        "YBS-65",
+        "YBS-77",
+        "YBS-86",
+        "YBS-99",
+        "YBS-108",
+        "YBS-121",
+        "YBS-218"
+      ]
+    },
+    {
+      "id": "stop-dagon-seikkan",
+      "nameEn": "Dagon Seikkan",
+      "nameMm": "????????????",
+      "latitude": 16.7697,
+      "longitude": 96.2439,
+      "landmarkEn": "Dagon Seikkan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-20",
+        "ybs-41",
+        "ybs-42",
+        "ybs-64",
+        "ybs-86",
+        "ybs-107",
+        "ybs-108",
+        "ybs-129",
+        "ybs-218"
+      ],
+      "routeNumbers": [
+        "YBS-20",
+        "YBS-41",
+        "YBS-42",
+        "YBS-64",
+        "YBS-86",
+        "YBS-107",
+        "YBS-108",
+        "YBS-129",
+        "YBS-218"
+      ]
+    },
+    {
+      "id": "stop-dagon-seikkan",
+      "nameEn": "Dagon Seikkan",
+      "nameMm": "ဒဂုံဆိပ်ကမ်း",
+      "latitude": 16.8398,
+      "longitude": 96.2738,
+      "landmarkEn": "Dagon Seikkan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-24",
+        "ybs-60",
+        "ybs-110"
+      ],
+      "routeNumbers": [
+        "YBS-24",
+        "YBS-60",
+        "YBS-110"
+      ]
+    },
+    {
+      "id": "stop-dagon-university",
+      "nameEn": "Dagon University",
+      "nameMm": "ဒဂုံတက္ကသိုလ်",
+      "latitude": 16.914,
+      "longitude": 96.222,
+      "landmarkEn": "Dagon University",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-46",
+        "ybs-93",
+        "ybs-155"
+      ],
+      "routeNumbers": [
+        "YBS-46",
+        "YBS-93",
+        "YBS-155"
+      ]
+    },
+    {
+      "id": "stop-danyingone",
+      "nameEn": "Danyingone",
+      "nameMm": "ဒညင်းကုန်း",
+      "latitude": 16.928,
+      "longitude": 96.111,
+      "landmarkEn": "Danyingone",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-30"
+      ],
+      "routeNumbers": [
+        "YBS-30"
+      ]
+    },
+    {
+      "id": "stop-dawbon",
+      "nameEn": "Dawbon",
+      "nameMm": "ဒေါပုံ",
+      "latitude": 16.7845,
+      "longitude": 96.195,
+      "landmarkEn": "Dawbon",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-12",
+        "ybs-65"
+      ],
+      "routeNumbers": [
+        "YBS-12",
+        "YBS-65"
+      ]
+    },
+    {
+      "id": "stop-downtown",
+      "nameEn": "Downtown",
+      "nameMm": "မြို့ထဲ",
+      "latitude": 16.7791,
+      "longitude": 96.1528,
+      "landmarkEn": "Downtown",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-9",
+        "ybs-11",
+        "ybs-24",
+        "ybs-33",
+        "ybs-43",
+        "ybs-51",
+        "ybs-53",
+        "ybs-65",
+        "ybs-93",
+        "ybs-127",
+        "ybs-202"
+      ],
+      "routeNumbers": [
+        "YBS-9",
+        "YBS-11",
+        "YBS-24",
+        "YBS-33",
+        "YBS-43",
+        "YBS-51",
+        "YBS-53",
+        "YBS-65",
+        "YBS-93",
+        "YBS-127",
+        "YBS-202"
+      ]
+    },
+    {
+      "id": "stop-fmi-centre-pyay-road",
+      "nameEn": "FMI Centre / Pyay Road",
+      "nameMm": "?????????????????? / ????????",
+      "latitude": 16.853,
+      "longitude": 96.1352,
+      "landmarkEn": "FMI Centre",
+      "landmarkMm": "??????????????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-36"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-36"
+      ]
+    },
+    {
+      "id": "stop-hlaing",
+      "nameEn": "Hlaing",
+      "nameMm": "လှိုင်",
+      "latitude": 16.8456,
+      "longitude": 96.1287,
+      "landmarkEn": "Hlaing",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-1",
+        "ybs-2",
+        "ybs-19",
+        "ybs-36",
+        "ybs-63"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-2",
+        "YBS-19",
+        "YBS-36",
+        "YBS-63"
+      ]
+    },
+    {
+      "id": "stop-hlaing",
+      "nameEn": "Hlaing",
+      "nameMm": "??????",
+      "latitude": 16.8562,
+      "longitude": 96.0999,
+      "landmarkEn": "Hlaing",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-23",
+        "ybs-28",
+        "ybs-45",
+        "ybs-50",
+        "ybs-67",
+        "ybs-89",
+        "ybs-94",
+        "ybs-111",
+        "ybs-116"
+      ],
+      "routeNumbers": [
+        "YBS-23",
+        "YBS-28",
+        "YBS-45",
+        "YBS-50",
+        "YBS-67",
+        "YBS-89",
+        "YBS-94",
+        "YBS-111",
+        "YBS-116"
+      ]
+    },
+    {
+      "id": "stop-hlaing-tharyar",
+      "nameEn": "Hlaing Tharyar",
+      "nameMm": "??????????",
+      "latitude": 16.87,
+      "longitude": 96.0293,
+      "landmarkEn": "Hlaing Tharyar",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-16",
+        "ybs-47",
+        "ybs-82",
+        "ybs-91",
+        "ybs-104",
+        "ybs-113",
+        "ybs-126",
+        "ybs-170"
+      ],
+      "routeNumbers": [
+        "YBS-16",
+        "YBS-47",
+        "YBS-82",
+        "YBS-91",
+        "YBS-104",
+        "YBS-113",
+        "YBS-126",
+        "YBS-170"
+      ]
+    },
+    {
+      "id": "stop-hledan",
+      "nameEn": "Hledan",
+      "nameMm": "လည်းတန်း",
+      "latitude": 16.8296,
+      "longitude": 96.1307,
+      "landmarkEn": "Hledan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-2",
+        "ybs-12",
+        "ybs-36"
+      ],
+      "routeNumbers": [
+        "YBS-2",
+        "YBS-12",
+        "YBS-36"
+      ]
+    },
+    {
+      "id": "stop-hledan-market",
+      "nameEn": "Hledan Market",
+      "nameMm": "???????????",
+      "latitude": 16.8563,
+      "longitude": 96.1275,
+      "landmarkEn": "Hledan Market",
+      "landmarkMm": "???????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-36",
+        "ybs-63"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-36",
+        "YBS-63"
+      ]
+    },
+    {
+      "id": "stop-htan-chauk-pin",
+      "nameEn": "Htan Chauk Pin",
+      "nameMm": "ထန်းခြောက်ပင်",
+      "latitude": 16.912,
+      "longitude": 96.105,
+      "landmarkEn": "Htan Chauk Pin",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-56",
+        "ybs-174"
+      ],
+      "routeNumbers": [
+        "YBS-56",
+        "YBS-174"
+      ]
+    },
+    {
+      "id": "stop-htauk-kyant",
+      "nameEn": "Htauk Kyant",
+      "nameMm": "ထောက်ကြန့်",
+      "latitude": 17.021,
+      "longitude": 96.096,
+      "landmarkEn": "Htauk Kyant",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-80",
+        "ybs-127"
+      ],
+      "routeNumbers": [
+        "YBS-80",
+        "YBS-127"
+      ]
+    },
+    {
+      "id": "stop-insein",
+      "nameEn": "Insein",
+      "nameMm": "အင်းစိန်",
+      "latitude": 16.8904,
+      "longitude": 96.0999,
+      "landmarkEn": "Insein",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-1",
+        "ybs-15",
+        "ybs-36",
+        "ybs-56",
+        "ybs-63"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-15",
+        "YBS-36",
+        "YBS-56",
+        "YBS-63"
+      ]
+    },
+    {
+      "id": "stop-insein",
+      "nameEn": "Insein",
+      "nameMm": "????????",
+      "latitude": 17.0068,
+      "longitude": 96.0958,
+      "landmarkEn": "Insein",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-22",
+        "ybs-44",
+        "ybs-59",
+        "ybs-81",
+        "ybs-103",
+        "ybs-125"
+      ],
+      "routeNumbers": [
+        "YBS-22",
+        "YBS-44",
+        "YBS-59",
+        "YBS-81",
+        "YBS-103",
+        "YBS-125"
+      ]
+    },
+    {
+      "id": "stop-insein-thiri-mingalar",
+      "nameEn": "Insein Road / Thiri Mingalar",
+      "nameMm": "???????????? / ???????????",
+      "latitude": 16.8655,
+      "longitude": 96.1155,
+      "landmarkEn": "Thiri Mingalar Market",
+      "landmarkMm": "??????????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-36",
+        "ybs-63"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-36",
+        "YBS-63"
+      ]
+    },
+    {
+      "id": "stop-inya-road-junction",
+      "nameEn": "Inya Road Junction",
+      "nameMm": "???????????????",
+      "latitude": 16.8675,
+      "longitude": 96.1378,
+      "landmarkEn": "Inya Road",
+      "landmarkMm": "????????????",
+      "routeIds": [
+        "ybs-36"
+      ],
+      "routeNumbers": [
+        "YBS-36"
+      ]
+    },
+    {
+      "id": "stop-junction-city-pyay-road",
+      "nameEn": "Junction City / Pyay Road",
+      "nameMm": "???????????????? / ????????",
+      "latitude": 16.8482,
+      "longitude": 96.139,
+      "landmarkEn": "Junction City",
+      "landmarkMm": "????????????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-36"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-36"
+      ]
+    },
+    {
+      "id": "stop-kabar-aye",
+      "nameEn": "Kabar Aye",
+      "nameMm": "ကမ္ဘာအေး",
+      "latitude": 16.8575,
+      "longitude": 96.1557,
+      "landmarkEn": "Kabar Aye",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-43",
+        "ybs-72"
+      ],
+      "routeNumbers": [
+        "YBS-43",
+        "YBS-72"
+      ]
+    },
+    {
+      "id": "stop-kamaryut",
+      "nameEn": "Kamaryut",
+      "nameMm": "???????",
+      "latitude": 16.8498,
+      "longitude": 96.1244,
+      "landmarkEn": "Kamaryut",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-16",
+        "ybs-17",
+        "ybs-36",
+        "ybs-39",
+        "ybs-61",
+        "ybs-63",
+        "ybs-82",
+        "ybs-83",
+        "ybs-104",
+        "ybs-105",
+        "ybs-126",
+        "ybs-170"
+      ],
+      "routeNumbers": [
+        "YBS-16",
+        "YBS-17",
+        "YBS-36",
+        "YBS-39",
+        "YBS-61",
+        "YBS-63",
+        "YBS-82",
+        "YBS-83",
+        "YBS-104",
+        "YBS-105",
+        "YBS-126",
+        "YBS-170"
+      ]
+    },
+    {
+      "id": "stop-kyauk-myaung",
+      "nameEn": "Kyauk Myaung Bus Stop",
+      "nameMm": "??????????????????????",
+      "latitude": 16.874,
+      "longitude": 96.145,
+      "landmarkEn": "Kyauk Myaung",
+      "landmarkMm": "?????????????",
+      "routeIds": [
+        "ybs-38"
+      ],
+      "routeNumbers": [
+        "YBS-38"
+      ]
+    },
+    {
+      "id": "stop-kyaukmyaung",
+      "nameEn": "Kyaukmyaung",
+      "nameMm": "ကျောက်မြောင်း",
+      "latitude": 16.808,
+      "longitude": 96.1685,
+      "landmarkEn": "Kyaukmyaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-66"
+      ],
+      "routeNumbers": [
+        "YBS-66"
+      ]
+    },
+    {
+      "id": "stop-kyauktada",
+      "nameEn": "Kyauktada",
+      "nameMm": "ကျောက်တံတား",
+      "latitude": 16.7748,
+      "longitude": 96.1608,
+      "landmarkEn": "Kyauktada",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-19",
+        "ybs-38",
+        "ybs-69",
+        "ybs-96",
+        "ybs-106"
+      ],
+      "routeNumbers": [
+        "YBS-19",
+        "YBS-38",
+        "YBS-69",
+        "YBS-96",
+        "YBS-106"
+      ]
+    },
+    {
+      "id": "stop-kyauktada",
+      "nameEn": "Kyauktada",
+      "nameMm": "???????????",
+      "latitude": 16.7839,
+      "longitude": 96.1608,
+      "landmarkEn": "Kyauktada",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-14",
+        "ybs-87",
+        "ybs-124"
+      ],
+      "routeNumbers": [
+        "YBS-14",
+        "YBS-87",
+        "YBS-124"
+      ]
+    },
+    {
+      "id": "stop-kyee-myin-daing",
+      "nameEn": "Kyee Myin Daing",
+      "nameMm": "ကြည့်မြင်တိုင်",
+      "latitude": 16.8056,
+      "longitude": 96.1283,
+      "landmarkEn": "Kyee Myin Daing",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-63"
+      ],
+      "routeNumbers": [
+        "YBS-63"
+      ]
+    },
+    {
+      "id": "stop-kyee-myin-daing",
+      "nameEn": "Kyee Myin Daing",
+      "nameMm": "??????????????",
+      "latitude": 16.8207,
+      "longitude": 96.1335,
+      "landmarkEn": "Kyee Myin Daing",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-22",
+        "ybs-31",
+        "ybs-44",
+        "ybs-75",
+        "ybs-97",
+        "ybs-119"
+      ],
+      "routeNumbers": [
+        "YBS-22",
+        "YBS-31",
+        "YBS-44",
+        "YBS-75",
+        "YBS-97",
+        "YBS-119"
+      ]
+    },
+    {
+      "id": "stop-lanmadaw",
+      "nameEn": "Lanmadaw",
+      "nameMm": "လမ်းမတော်",
+      "latitude": 16.778,
+      "longitude": 96.145,
+      "landmarkEn": "Lanmadaw",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-2"
+      ],
+      "routeNumbers": [
+        "YBS-2"
+      ]
+    },
+    {
+      "id": "stop-lanmadaw",
+      "nameEn": "Lanmadaw",
+      "nameMm": "?????????",
+      "latitude": 16.7909,
+      "longitude": 96.1397,
+      "landmarkEn": "Lanmadaw",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-8",
+        "ybs-13",
+        "ybs-35",
+        "ybs-52",
+        "ybs-57",
+        "ybs-74",
+        "ybs-79",
+        "ybs-101",
+        "ybs-118",
+        "ybs-123",
+        "ybs-140"
+      ],
+      "routeNumbers": [
+        "YBS-8",
+        "YBS-13",
+        "YBS-35",
+        "YBS-52",
+        "YBS-57",
+        "YBS-74",
+        "YBS-79",
+        "YBS-101",
+        "YBS-118",
+        "YBS-123",
+        "YBS-140"
+      ]
+    },
+    {
+      "id": "stop-latha",
+      "nameEn": "Latha",
+      "nameMm": "???",
+      "latitude": 16.7881,
+      "longitude": 96.1502,
+      "landmarkEn": "Latha",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-5",
+        "ybs-27",
+        "ybs-28",
+        "ybs-49",
+        "ybs-50",
+        "ybs-71",
+        "ybs-94",
+        "ybs-115",
+        "ybs-116"
+      ],
+      "routeNumbers": [
+        "YBS-5",
+        "YBS-27",
+        "YBS-28",
+        "YBS-49",
+        "YBS-50",
+        "YBS-71",
+        "YBS-94",
+        "YBS-115",
+        "YBS-116"
+      ]
+    },
+    {
+      "id": "stop-maha-bandoola-park",
+      "nameEn": "Maha Bandoola Park",
+      "nameMm": "????????????????",
+      "latitude": 16.7802,
+      "longitude": 96.16,
+      "landmarkEn": "Maha Bandoola Park",
+      "landmarkMm": "????????????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-9",
+        "ybs-38",
+        "ybs-46",
+        "ybs-65"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-9",
+        "YBS-38",
+        "YBS-46",
+        "YBS-65"
+      ]
+    },
+    {
+      "id": "stop-mayangone",
+      "nameEn": "Mayangone",
+      "nameMm": "မရမ်းကုန်း",
+      "latitude": 16.861,
+      "longitude": 96.1445,
+      "landmarkEn": "Mayangone",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-85"
+      ],
+      "routeNumbers": [
+        "YBS-85"
+      ]
+    },
+    {
+      "id": "stop-mingaladon",
+      "nameEn": "Mingaladon",
+      "nameMm": "မင်္ဂလာဒုံ",
+      "latitude": 16.935,
+      "longitude": 96.1208,
+      "landmarkEn": "Mingaladon",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-21",
+        "ybs-33",
+        "ybs-72",
+        "ybs-109"
+      ],
+      "routeNumbers": [
+        "YBS-21",
+        "YBS-33",
+        "YBS-72",
+        "YBS-109"
+      ]
+    },
+    {
+      "id": "stop-mingaladon",
+      "nameEn": "Mingaladon",
+      "nameMm": "??????????",
+      "latitude": 17.0813,
+      "longitude": 96.1241,
+      "landmarkEn": "Mingaladon",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-34",
+        "ybs-59",
+        "ybs-78",
+        "ybs-81",
+        "ybs-103",
+        "ybs-122",
+        "ybs-125"
+      ],
+      "routeNumbers": [
+        "YBS-34",
+        "YBS-59",
+        "YBS-78",
+        "YBS-81",
+        "YBS-103",
+        "YBS-122",
+        "YBS-125"
+      ]
+    },
+    {
+      "id": "stop-mingalar-taung-nyunt",
+      "nameEn": "Mingalar Taung Nyunt",
+      "nameMm": "?????????????????",
+      "latitude": 16.7955,
+      "longitude": 96.1706,
+      "landmarkEn": "Mingalar Taung Nyunt",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-18",
+        "ybs-29",
+        "ybs-62",
+        "ybs-73",
+        "ybs-84",
+        "ybs-95",
+        "ybs-117",
+        "ybs-128"
+      ],
+      "routeNumbers": [
+        "YBS-18",
+        "YBS-29",
+        "YBS-62",
+        "YBS-73",
+        "YBS-84",
+        "YBS-95",
+        "YBS-117",
+        "YBS-128"
+      ]
+    },
+    {
+      "id": "stop-myaynigone",
+      "nameEn": "Myaynigone",
+      "nameMm": "မြေနီကုန်း",
+      "latitude": 16.8015,
+      "longitude": 96.1435,
+      "landmarkEn": "Myaynigone",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-1",
+        "ybs-12",
+        "ybs-37"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-12",
+        "YBS-37"
+      ]
+    },
+    {
+      "id": "stop-nandawon-market",
+      "nameEn": "Nandawon Market Stop",
+      "nameMm": "???????????????????",
+      "latitude": 16.8669,
+      "longitude": 96.201,
+      "landmarkEn": "Nandawon Market",
+      "landmarkMm": "??????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-north-okkalapa",
+      "nameEn": "North Okkalapa",
+      "nameMm": "?????????????",
+      "latitude": 16.8821,
+      "longitude": 96.2049,
+      "landmarkEn": "North Okkalapa",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-4",
+        "ybs-26",
+        "ybs-48",
+        "ybs-55",
+        "ybs-70",
+        "ybs-77",
+        "ybs-92",
+        "ybs-99",
+        "ybs-114",
+        "ybs-121"
+      ],
+      "routeNumbers": [
+        "YBS-4",
+        "YBS-26",
+        "YBS-48",
+        "YBS-55",
+        "YBS-70",
+        "YBS-77",
+        "YBS-92",
+        "YBS-99",
+        "YBS-114",
+        "YBS-121"
+      ]
+    },
+    {
+      "id": "stop-north-okkalapa",
+      "nameEn": "North Okkalapa",
+      "nameMm": "မြောက်ဥက္ကလာပ",
+      "latitude": 16.9054,
+      "longitude": 96.1632,
+      "landmarkEn": "North Okkalapa",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-6",
+        "ybs-25",
+        "ybs-53",
+        "ybs-106"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-25",
+        "YBS-53",
+        "YBS-106"
+      ]
+    },
+    {
+      "id": "stop-pabedan",
+      "nameEn": "Pabedan",
+      "nameMm": "??????????",
+      "latitude": 16.7843,
+      "longitude": 96.1545,
+      "landmarkEn": "Pabedan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-68",
+        "ybs-87",
+        "ybs-90",
+        "ybs-112"
+      ],
+      "routeNumbers": [
+        "YBS-68",
+        "YBS-87",
+        "YBS-90",
+        "YBS-112"
+      ]
+    },
+    {
+      "id": "stop-pansodan",
+      "nameEn": "Pansodan",
+      "nameMm": "ပန်းဆိုးတန်း",
+      "latitude": 16.7757,
+      "longitude": 96.1635,
+      "landmarkEn": "Pansodan",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-25",
+        "ybs-46",
+        "ybs-60",
+        "ybs-72",
+        "ybs-100",
+        "ybs-138"
+      ],
+      "routeNumbers": [
+        "YBS-25",
+        "YBS-46",
+        "YBS-60",
+        "YBS-72",
+        "YBS-100",
+        "YBS-138"
+      ]
+    },
+    {
+      "id": "stop-pansodan-street",
+      "nameEn": "Pansodan Street",
+      "nameMm": "????????????????",
+      "latitude": 16.78,
+      "longitude": 96.1562,
+      "landmarkEn": "Pansodan Street",
+      "landmarkMm": "????????????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-46",
+        "ybs-53",
+        "ybs-65"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-46",
+        "YBS-53",
+        "YBS-65"
+      ]
+    },
+    {
+      "id": "stop-pazundaung",
+      "nameEn": "Pazundaung",
+      "nameMm": "ပုဇွန်တောင်",
+      "latitude": 16.7798,
+      "longitude": 96.1781,
+      "landmarkEn": "Pazundaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-37",
+        "ybs-63",
+        "ybs-88",
+        "ybs-109",
+        "ybs-188"
+      ],
+      "routeNumbers": [
+        "YBS-37",
+        "YBS-63",
+        "YBS-88",
+        "YBS-109",
+        "YBS-188"
+      ]
+    },
+    {
+      "id": "stop-pazundaung",
+      "nameEn": "Pazundaung",
+      "nameMm": "???????????",
+      "latitude": 16.7925,
+      "longitude": 96.1744,
+      "landmarkEn": "Pazundaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-5",
+        "ybs-14",
+        "ybs-27",
+        "ybs-49",
+        "ybs-71",
+        "ybs-115",
+        "ybs-124"
+      ],
+      "routeNumbers": [
+        "YBS-5",
+        "YBS-14",
+        "YBS-27",
+        "YBS-49",
+        "YBS-71",
+        "YBS-115",
+        "YBS-124"
+      ]
+    },
+    {
+      "id": "stop-pazundaung-clock-tower",
+      "nameEn": "Pazundaung Clock Tower",
+      "nameMm": "??????????????????",
+      "latitude": 16.789,
+      "longitude": 96.17,
+      "landmarkEn": "Pazundaung Clock Tower",
+      "landmarkMm": "??????????????????",
+      "routeIds": [
+        "ybs-37",
+        "ybs-63",
+        "ybs-65"
+      ],
+      "routeNumbers": [
+        "YBS-37",
+        "YBS-63",
+        "YBS-65"
+      ]
+    },
+    {
+      "id": "stop-pyay-hledan-junction",
+      "nameEn": "Pyay Road / Hledan Junction",
+      "nameMm": "???????? / ???????????????",
+      "latitude": 16.859,
+      "longitude": 96.131,
+      "landmarkEn": "Hledan Junction",
+      "landmarkMm": "???????????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-36",
+        "ybs-63"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-36",
+        "YBS-63"
+      ]
+    },
+    {
+      "id": "stop-sanchaung",
+      "nameEn": "Sanchaung",
+      "nameMm": "စမ်းချောင်း",
+      "latitude": 16.8076,
+      "longitude": 96.1327,
+      "landmarkEn": "Sanchaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-3",
+        "ybs-37"
+      ],
+      "routeNumbers": [
+        "YBS-3",
+        "YBS-37"
+      ]
+    },
+    {
+      "id": "stop-sanchaung",
+      "nameEn": "Sanchaung",
+      "nameMm": "???????????",
+      "latitude": 16.8472,
+      "longitude": 96.1393,
+      "landmarkEn": "Sanchaung",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-41",
+        "ybs-68",
+        "ybs-90",
+        "ybs-107",
+        "ybs-112",
+        "ybs-129"
+      ],
+      "routeNumbers": [
+        "YBS-41",
+        "YBS-68",
+        "YBS-90",
+        "YBS-107",
+        "YBS-112",
+        "YBS-129"
+      ]
+    },
+    {
+      "id": "stop-shwedagon-east",
+      "nameEn": "Shwedagon East Gate",
+      "nameMm": "?????????????? ?????????????",
+      "latitude": 16.865,
+      "longitude": 96.1534,
+      "landmarkEn": "Shwedagon Pagoda",
+      "landmarkMm": "??????????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-37",
+        "ybs-38"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-37",
+        "YBS-38"
+      ]
+    },
+    {
+      "id": "stop-shwedagon-north",
+      "nameEn": "Shwedagon North Gate",
+      "nameMm": "?????????????? ??????????????",
+      "latitude": 16.8718,
+      "longitude": 96.148,
+      "landmarkEn": "Shwedagon Pagoda",
+      "landmarkMm": "??????????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-37"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-37"
+      ]
+    },
+    {
+      "id": "stop-shwepyithar",
+      "nameEn": "Shwepyithar",
+      "nameMm": "ရွှေပြည်သာ",
+      "latitude": 16.9535,
+      "longitude": 96.0916,
+      "landmarkEn": "Shwepyithar",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-7",
+        "ybs-56",
+        "ybs-100"
+      ],
+      "routeNumbers": [
+        "YBS-7",
+        "YBS-56",
+        "YBS-100"
+      ]
+    },
+    {
+      "id": "stop-shwepyithar",
+      "nameEn": "Shwepyithar",
+      "nameMm": "??????????",
+      "latitude": 17.0497,
+      "longitude": 96.0636,
+      "landmarkEn": "Shwepyithar",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-8",
+        "ybs-31",
+        "ybs-52",
+        "ybs-74",
+        "ybs-75",
+        "ybs-97",
+        "ybs-118",
+        "ybs-119",
+        "ybs-140"
+      ],
+      "routeNumbers": [
+        "YBS-8",
+        "YBS-31",
+        "YBS-52",
+        "YBS-74",
+        "YBS-75",
+        "YBS-97",
+        "YBS-118",
+        "YBS-119",
+        "YBS-140"
+      ]
+    },
+    {
+      "id": "stop-south-dagon",
+      "nameEn": "South Dagon",
+      "nameMm": "တောင်ဒဂုံ",
+      "latitude": 16.8408,
+      "longitude": 96.2354,
+      "landmarkEn": "South Dagon",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-40",
+        "ybs-46",
+        "ybs-60",
+        "ybs-202"
+      ],
+      "routeNumbers": [
+        "YBS-40",
+        "YBS-46",
+        "YBS-60",
+        "YBS-202"
+      ]
+    },
+    {
+      "id": "stop-south-okkalapa",
+      "nameEn": "South Okkalapa",
+      "nameMm": "တောင်ဥက္ကလာပ",
+      "latitude": 16.8401,
+      "longitude": 96.1848,
+      "landmarkEn": "South Okkalapa",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-11",
+        "ybs-69",
+        "ybs-102"
+      ],
+      "routeNumbers": [
+        "YBS-11",
+        "YBS-69",
+        "YBS-102"
+      ]
+    },
+    {
+      "id": "stop-south-okkalapa",
+      "nameEn": "South Okkalapa",
+      "nameMm": "????????????",
+      "latitude": 16.8547,
+      "longitude": 96.2098,
+      "landmarkEn": "South Okkalapa",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-18",
+        "ybs-29",
+        "ybs-62",
+        "ybs-73",
+        "ybs-84",
+        "ybs-95",
+        "ybs-117",
+        "ybs-128"
+      ],
+      "routeNumbers": [
+        "YBS-18",
+        "YBS-29",
+        "YBS-62",
+        "YBS-73",
+        "YBS-84",
+        "YBS-95",
+        "YBS-117",
+        "YBS-128"
+      ]
+    },
+    {
+      "id": "stop-south-okkalapa-central",
+      "nameEn": "South Okkalapa Central Stop",
+      "nameMm": "???????????? ?????????????",
+      "latitude": 16.8622,
+      "longitude": 96.1965,
+      "landmarkEn": "South Okkalapa",
+      "landmarkMm": "????????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-9",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-9",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-sule-pagoda",
+      "nameEn": "Sule Pagoda",
+      "nameMm": "ဆူးလေဘုရား",
+      "latitude": 16.7742,
+      "longitude": 96.1588,
+      "landmarkEn": "Sule Pagoda",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-1",
+        "ybs-2",
+        "ybs-6",
+        "ybs-7",
+        "ybs-21",
+        "ybs-30",
+        "ybs-36",
+        "ybs-37",
+        "ybs-43",
+        "ybs-46",
+        "ybs-53",
+        "ybs-56",
+        "ybs-58",
+        "ybs-60",
+        "ybs-63",
+        "ybs-65",
+        "ybs-66",
+        "ybs-69",
+        "ybs-85",
+        "ybs-130",
+        "ybs-155",
+        "ybs-209"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-2",
+        "YBS-6",
+        "YBS-7",
+        "YBS-21",
+        "YBS-30",
+        "YBS-36",
+        "YBS-37",
+        "YBS-43",
+        "YBS-46",
+        "YBS-53",
+        "YBS-56",
+        "YBS-58",
+        "YBS-60",
+        "YBS-63",
+        "YBS-65",
+        "YBS-66",
+        "YBS-69",
+        "YBS-85",
+        "YBS-130",
+        "YBS-155",
+        "YBS-209"
+      ]
+    },
+    {
+      "id": "stop-sule-pagoda-downtown",
+      "nameEn": "Sule Pagoda",
+      "nameMm": "??????????",
+      "latitude": 16.7771,
+      "longitude": 96.1601,
+      "landmarkEn": "Sule Pagoda",
+      "landmarkMm": "??????????",
+      "routeIds": [
+        "ybs-1",
+        "ybs-6",
+        "ybs-37",
+        "ybs-46",
+        "ybs-53",
+        "ybs-65",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-1",
+        "YBS-6",
+        "YBS-37",
+        "YBS-46",
+        "YBS-53",
+        "YBS-65",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-tamwe",
+      "nameEn": "Tamwe",
+      "nameMm": "တာမွေ",
+      "latitude": 16.8122,
+      "longitude": 96.1734,
+      "landmarkEn": "Tamwe",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-9",
+        "ybs-12",
+        "ybs-38",
+        "ybs-65",
+        "ybs-66"
+      ],
+      "routeNumbers": [
+        "YBS-9",
+        "YBS-12",
+        "YBS-38",
+        "YBS-65",
+        "YBS-66"
+      ]
+    },
+    {
+      "id": "stop-tamwe-junction",
+      "nameEn": "Tamwe Junction",
+      "nameMm": "????????????",
+      "latitude": 16.829,
+      "longitude": 96.183,
+      "landmarkEn": "Tamwe Junction",
+      "landmarkMm": "????????????",
+      "routeIds": [
+        "ybs-9",
+        "ybs-38",
+        "ybs-65",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-9",
+        "YBS-38",
+        "YBS-65",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-thaketa",
+      "nameEn": "Thaketa",
+      "nameMm": "သာကေတ",
+      "latitude": 16.7804,
+      "longitude": 96.2119,
+      "landmarkEn": "Thaketa",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-3",
+        "ybs-12",
+        "ybs-65"
+      ],
+      "routeNumbers": [
+        "YBS-3",
+        "YBS-12",
+        "YBS-65"
+      ]
+    },
+    {
+      "id": "stop-thaketa",
+      "nameEn": "Thaketa",
+      "nameMm": "?????",
+      "latitude": 16.806,
+      "longitude": 96.2023,
+      "landmarkEn": "Thaketa",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-17",
+        "ybs-34",
+        "ybs-39",
+        "ybs-61",
+        "ybs-78",
+        "ybs-83",
+        "ybs-105",
+        "ybs-122"
+      ],
+      "routeNumbers": [
+        "YBS-17",
+        "YBS-34",
+        "YBS-39",
+        "YBS-61",
+        "YBS-78",
+        "YBS-83",
+        "YBS-105",
+        "YBS-122"
+      ]
+    },
+    {
+      "id": "stop-thanlyin-gate",
+      "nameEn": "Thanlyin Gate",
+      "nameMm": "သန်လျင်ဂိတ်",
+      "latitude": 16.759,
+      "longitude": 96.238,
+      "landmarkEn": "Thanlyin Gate",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-58"
+      ],
+      "routeNumbers": [
+        "YBS-58"
+      ]
+    },
+    {
+      "id": "stop-thanthumar",
+      "nameEn": "Thanthumar",
+      "nameMm": "သံသုမာ",
+      "latitude": 16.838,
+      "longitude": 96.203,
+      "landmarkEn": "Thanthumar",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-46",
+        "ybs-60",
+        "ybs-130"
+      ],
+      "routeNumbers": [
+        "YBS-46",
+        "YBS-60",
+        "YBS-130"
+      ]
+    },
+    {
+      "id": "stop-tharrmwe",
+      "nameEn": "Tharrmwe",
+      "nameMm": "?????",
+      "latitude": 16.7927,
+      "longitude": 96.1733,
+      "landmarkEn": "Tharrmwe",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-10",
+        "ybs-32",
+        "ybs-47",
+        "ybs-54",
+        "ybs-76",
+        "ybs-91",
+        "ybs-98",
+        "ybs-113",
+        "ybs-120"
+      ],
+      "routeNumbers": [
+        "YBS-10",
+        "YBS-32",
+        "YBS-47",
+        "YBS-54",
+        "YBS-76",
+        "YBS-91",
+        "YBS-98",
+        "YBS-113",
+        "YBS-120"
+      ]
+    },
+    {
+      "id": "stop-thingangyun",
+      "nameEn": "Thingangyun",
+      "nameMm": "သင်္ဃန်းကျွန်း",
+      "latitude": 16.8197,
+      "longitude": 96.1972,
+      "landmarkEn": "Thingangyun",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-9"
+      ],
+      "routeNumbers": [
+        "YBS-9"
+      ]
+    },
+    {
+      "id": "stop-thingangyun",
+      "nameEn": "Thingangyun",
+      "nameMm": "??????????????",
+      "latitude": 16.8456,
+      "longitude": 96.2145,
+      "landmarkEn": "Thingangyun",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-4",
+        "ybs-23",
+        "ybs-26",
+        "ybs-45",
+        "ybs-48",
+        "ybs-67",
+        "ybs-70",
+        "ybs-89",
+        "ybs-92",
+        "ybs-111",
+        "ybs-114"
+      ],
+      "routeNumbers": [
+        "YBS-4",
+        "YBS-23",
+        "YBS-26",
+        "YBS-45",
+        "YBS-48",
+        "YBS-67",
+        "YBS-70",
+        "YBS-89",
+        "YBS-92",
+        "YBS-111",
+        "YBS-114"
+      ]
+    },
+    {
+      "id": "stop-thingangyun-sanpya",
+      "nameEn": "Thingangyun Sanpya Stop",
+      "nameMm": "?????????????? ?????????????",
+      "latitude": 16.861,
+      "longitude": 96.19,
+      "landmarkEn": "Thingangyun Sanpya",
+      "landmarkMm": "?????????????? ????",
+      "routeIds": [
+        "ybs-9"
+      ],
+      "routeNumbers": [
+        "YBS-9"
+      ]
+    },
+    {
+      "id": "stop-thitsar-road-junction",
+      "nameEn": "Thitsar Road Junction",
+      "nameMm": "????????????",
+      "latitude": 16.8661,
+      "longitude": 96.1951,
+      "landmarkEn": "Thitsar Road",
+      "landmarkMm": "?????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-9",
+        "ybs-53",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-9",
+        "YBS-53",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-thuwunna",
+      "nameEn": "Thuwunna",
+      "nameMm": "သုဝဏ္ဏ",
+      "latitude": 16.8014,
+      "longitude": 96.1901,
+      "landmarkEn": "Thuwunna",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-9",
+        "ybs-53",
+        "ybs-96",
+        "ybs-209"
+      ],
+      "routeNumbers": [
+        "YBS-9",
+        "YBS-53",
+        "YBS-96",
+        "YBS-209"
+      ]
+    },
+    {
+      "id": "stop-university-avenue-bahan",
+      "nameEn": "University Avenue / Bahan",
+      "nameMm": "??????????????????? / ?????",
+      "latitude": 16.842,
+      "longitude": 96.158,
+      "landmarkEn": "University Avenue",
+      "landmarkMm": "???????????????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-38"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-38"
+      ]
+    },
+    {
+      "id": "stop-waizayandar",
+      "nameEn": "Waizayandar",
+      "nameMm": "ဝေဇယန္တာ",
+      "latitude": 16.844,
+      "longitude": 96.188,
+      "landmarkEn": "Waizayandar",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-6",
+        "ybs-69",
+        "ybs-138"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-69",
+        "YBS-138"
+      ]
+    },
+    {
+      "id": "stop-waizayandar-parami-junction",
+      "nameEn": "Waizayandar / Parami Junction",
+      "nameMm": "???????? / ????????????",
+      "latitude": 16.8702,
+      "longitude": 96.1953,
+      "landmarkEn": "Waizayandar Road",
+      "landmarkMm": "????????????",
+      "routeIds": [
+        "ybs-6",
+        "ybs-53",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-53",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-yankin",
+      "nameEn": "Yankin",
+      "nameMm": "ရန်ကင်း",
+      "latitude": 16.829,
+      "longitude": 96.164,
+      "landmarkEn": "Yankin",
+      "landmarkMm": "",
+      "routeIds": [
+        "ybs-6",
+        "ybs-38",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-6",
+        "YBS-38",
+        "YBS-69"
+      ]
+    },
+    {
+      "id": "stop-yankin-market",
+      "nameEn": "Yankin Market",
+      "nameMm": "??????????",
+      "latitude": 16.835,
+      "longitude": 96.175,
+      "landmarkEn": "Yankin Market",
+      "landmarkMm": "??????????",
+      "routeIds": [
+        "ybs-9",
+        "ybs-38",
+        "ybs-69"
+      ],
+      "routeNumbers": [
+        "YBS-9",
+        "YBS-38",
+        "YBS-69"
+      ]
+    }
+  ]
+}

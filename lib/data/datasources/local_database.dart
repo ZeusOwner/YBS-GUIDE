@@ -13,7 +13,7 @@ class LocalDatabase {
   LocalDatabase._();
 
   static final LocalDatabase instance = LocalDatabase._();
-  static const int _databaseVersion = 5;
+  static const int _databaseVersion = 6;
   static const String _databaseName = 'ybs_guide.db';
 
   Database? _database;
@@ -60,7 +60,8 @@ class LocalDatabase {
         source TEXT NOT NULL DEFAULT 'official_seed',
         source_url TEXT NOT NULL DEFAULT '',
         last_updated TEXT NOT NULL DEFAULT '2026-05-30',
-        confidence REAL NOT NULL DEFAULT 0.6
+        confidence REAL NOT NULL DEFAULT 0.6,
+        data_confidence TEXT NOT NULL DEFAULT 'terminalOnly'
       )
     ''');
 
@@ -177,6 +178,11 @@ class LocalDatabase {
       );
       await db.execute('ALTER TABLE bus_stops ADD COLUMN landmark_en TEXT');
       await db.execute('ALTER TABLE bus_stops ADD COLUMN landmark_mm TEXT');
+    }
+    if (oldVersion < 6) {
+      await db.execute(
+        "ALTER TABLE bus_routes ADD COLUMN data_confidence TEXT NOT NULL DEFAULT 'terminalOnly'",
+      );
     }
   }
 
@@ -457,6 +463,7 @@ class LocalDatabase {
       'source_url': route.sourceUrl,
       'last_updated': route.lastUpdated,
       'confidence': route.confidence,
+      'data_confidence': route.dataConfidence.name,
     };
   }
 
@@ -492,6 +499,7 @@ class LocalDatabase {
       sourceUrl: row['source_url'] as String? ?? '',
       lastUpdated: row['last_updated'] as String? ?? '2026-05-30',
       confidence: ((row['confidence'] as num?) ?? 0.6).toDouble(),
+      dataConfidence: _parseDataConfidence(row['data_confidence'] as String?),
       routePath: (jsonDecode(row['route_path']! as String) as List<dynamic>)
           .map(
             (point) => RouteCoordinate.fromJson(point as Map<String, dynamic>),
@@ -605,6 +613,13 @@ class LocalDatabase {
       confidence: (row['confidence']! as num).toDouble(),
     );
   }
+}
+
+DataConfidence _parseDataConfidence(String? value) {
+  return DataConfidence.values.firstWhere(
+    (confidence) => confidence.name == value,
+    orElse: () => DataConfidence.terminalOnly,
+  );
 }
 
 String _text(Map<String, Object?> row, String key) {

@@ -10,6 +10,7 @@ class AppConstants {
   static const String welcomeRoute = '/welcome';
   static const String homeRoute = '/';
   static const String searchRoute = '/search';
+  static const String assistantRoute = '/assistant';
   static const String routeDetailRoute = '/route';
   static const String mapRoute = '/map';
   static const String favoritesRoute = '/favorites';

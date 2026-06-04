@@ -32,6 +32,17 @@ class LocalYbsDatasource implements RouteRepository {
   }
 
   @override
+  Future<List<BusStop>> getAllStops() async {
+    final stops = <String, BusStop>{};
+    for (final route in _sampleRoutes) {
+      for (final stop in route.stops) {
+        stops[stop.id] = stop;
+      }
+    }
+    return stops.values.toList();
+  }
+
+  @override
   Future<List<BusRoute>> searchRoutes(String query) async {
     final lowerQuery = query.toLowerCase();
     return _sampleRoutes.where((route) {

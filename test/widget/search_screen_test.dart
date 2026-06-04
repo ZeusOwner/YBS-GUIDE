@@ -26,7 +26,7 @@ void main() {
       ),
     );
 
-    await tester.enterText(find.byType(TextField), 'Hledan');
+    await tester.enterText(find.byType(TextField), 'Insein');
     await tester.pump(const Duration(milliseconds: 350));
     await tester.pump(const Duration(milliseconds: 100));
 

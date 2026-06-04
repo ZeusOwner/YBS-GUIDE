@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_constants.dart';
 
@@ -17,6 +16,7 @@ class AppTheme {
 
     return ThemeData(
       colorScheme: colorScheme,
+      brightness: Brightness.light,
       appBarTheme: const AppBarTheme(
         centerTitle: false,
         elevation: AppElevation.none,
@@ -41,6 +41,14 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: AppColors.primary.withAlpha(31),
       ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent,
+      ),
+      dialogTheme: const DialogThemeData(
+        backgroundColor: AppColors.surface,
+        surfaceTintColor: Colors.transparent,
+      ),
       scaffoldBackgroundColor: AppColors.background,
       textTheme: _textTheme(Brightness.light),
       useMaterial3: true,
@@ -59,6 +67,7 @@ class AppTheme {
 
     return ThemeData(
       colorScheme: colorScheme,
+      brightness: Brightness.dark,
       appBarTheme: const AppBarTheme(
         centerTitle: false,
         elevation: AppElevation.none,
@@ -83,6 +92,14 @@ class AppTheme {
       navigationBarTheme: NavigationBarThemeData(
         indicatorColor: AppColors.secondary.withAlpha(38),
       ),
+      bottomSheetTheme: const BottomSheetThemeData(
+        backgroundColor: AppColors.darkSurface,
+        surfaceTintColor: Colors.transparent,
+      ),
+      dialogTheme: const DialogThemeData(
+        backgroundColor: AppColors.darkSurface,
+        surfaceTintColor: Colors.transparent,
+      ),
       scaffoldBackgroundColor: AppColors.darkBackground,
       textTheme: _textTheme(Brightness.dark),
       useMaterial3: true,
@@ -93,8 +110,8 @@ class AppTheme {
     final baseTheme = brightness == Brightness.dark
         ? ThemeData.dark()
         : ThemeData.light();
-    final baseTextTheme = GoogleFonts.notoSansMyanmarTextTheme(
-      baseTheme.textTheme,
+    final baseTextTheme = baseTheme.textTheme.apply(
+      fontFamily: 'NotoSansMyanmar',
     );
 
     return baseTextTheme.copyWith(

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../presentation/screens/favorites_screen.dart';
+import '../../presentation/screens/assistant_screen.dart';
 import '../../presentation/screens/home/home_screen.dart';
 import '../../presentation/screens/map_screen.dart';
 import '../../presentation/screens/route_detail_screen.dart';
@@ -63,6 +64,10 @@ class AppRouter {
             ],
           ),
         ],
+      ),
+      GoRoute(
+        path: RouteNames.assistant,
+        builder: (context, state) => const AssistantScreen(),
       ),
       GoRoute(
         path: '${RouteNames.routeDetail}/:id',
