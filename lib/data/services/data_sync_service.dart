@@ -55,7 +55,7 @@ class DataSyncService {
       }
 
       final manifest =
-          jsonDecode(utf8.decode(manifestResponse.bodyBytes))
+          jsonDecode(_decodeJsonBytes(manifestResponse.bodyBytes))
               as Map<String, dynamic>;
       final remoteVersion = manifest['version'] as String? ?? '';
       final downloadUrl = manifest['downloadUrl'] as String? ?? '';
@@ -98,7 +98,7 @@ class DataSyncService {
         return const SyncResult(success: false, error: 'Checksum mismatch.');
       }
 
-      final parsed = jsonDecode(utf8.decode(bodyBytes));
+      final parsed = jsonDecode(_decodeJsonBytes(bodyBytes));
       final routeJsonList = _extractRoutes(parsed);
       if (routeCount != null && routeJsonList.length != routeCount) {
         return SyncResult(
@@ -197,6 +197,10 @@ class DataSyncService {
     return routeList
         .map((route) => Map<String, dynamic>.from(route as Map))
         .toList();
+  }
+
+  String _decodeJsonBytes(List<int> bytes) {
+    return utf8.decode(bytes).replaceFirst('\uFEFF', '');
   }
 
   bool _isRemoteNewer(String remote, String local) {
