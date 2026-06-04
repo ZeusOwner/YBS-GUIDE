@@ -1,0 +1,9 @@
+﻿{
+  "version": "1.0.0",
+  "lastUpdated": "2026-06-04",
+  "routeCount": 139,
+  "checksum": "sha256-16120caedad1be08adbf9c6fdd5bee768e6bd6e913a15cc0d36be9b7ba13008c",
+  "minAppVersion": "1.0.0",
+  "downloadUrl": "https://raw.githubusercontent.com/ZeusOwner/YBS-GUIDE/main/data/routes.json",
+  "changelog": "Initial production release with 139 YBS routes"
+}

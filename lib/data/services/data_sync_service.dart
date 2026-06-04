@@ -34,7 +34,7 @@ class DataSyncService {
       _client = client ?? http.Client();
 
   static const String manifestUrl =
-      'https://raw.githubusercontent.com/ZeusOwner/ybs-data/main/manifest.json';
+      'https://raw.githubusercontent.com/ZeusOwner/YBS-GUIDE/main/data/manifest.json';
   static const String _versionKey = 'data_version';
   static const String _lastUpdatedKey = 'data_last_updated';
 
@@ -91,7 +91,10 @@ class DataSyncService {
 
       final bodyBytes = routesResponse.bodyBytes;
       final actualChecksum = sha256.convert(bodyBytes).toString();
-      if (actualChecksum.toLowerCase() != checksum.toLowerCase()) {
+      final expectedChecksum = checksum
+          .replaceFirst(RegExp(r'^sha256-', caseSensitive: false), '')
+          .toLowerCase();
+      if (actualChecksum.toLowerCase() != expectedChecksum) {
         return const SyncResult(success: false, error: 'Checksum mismatch.');
       }
 
